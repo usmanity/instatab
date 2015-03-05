@@ -1,0 +1,14 @@
+body {
+  font-size: 36px;
+  width: 90%;
+  margin: auto;
+}
+h1 {
+  font-size: 1em;
+}
+.auth {
+  font-size: 0.7em;
+}
+.hidden {
+  display: none;
+}

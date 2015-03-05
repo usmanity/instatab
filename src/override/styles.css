@@ -1,0 +1,24 @@
+.hidden {
+  display: none !important;
+}
+.auth-button {
+
+}
+.photo {
+  width: 25%;
+  margin: 10px auto;
+  float: left;
+}
+.photo img {
+  width: 99%;
+}
+.feed {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  float: left;
+}
+.first-row, .second-row {
+  float: left;
+  width: 100%;
+}
