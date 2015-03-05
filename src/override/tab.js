@@ -5,6 +5,7 @@ chrome.storage.local.get('auth', function(code){
   authCode = code.auth;
 });
 
+// internal log function, displays logs on the page
 var _log = function(data){
   if (typeof(data) !== "object"){
     $(".log").text(data);
@@ -71,9 +72,8 @@ var displayFeed = function(feed){
   }
 }
 
-
+// handle intervals better
 var authInterval = '';
-
 var runInterval = function(){
   authInterval = window.setInterval(getAuth, 100);
 };
