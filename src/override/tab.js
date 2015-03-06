@@ -51,6 +51,7 @@ var displayFeed = function(feed){
   if ($(".first-row").text().length > 5){
     _log("clearing auth interval");
     window.clearInterval(authInterval);
+    return;
   }
   for (var i = 0; i < 8; i++){
     if (feed.data[i].type === "image"){
@@ -63,8 +64,10 @@ var displayFeed = function(feed){
       $el.append($username).append($photo);
       if (i < 4){
         $(".first-row").append($el);
+        console.log('adding to first row');
       } else {
         $(".second-row").append($el);
+        console.log('adding to 2nd row');
       }
     }
   }
