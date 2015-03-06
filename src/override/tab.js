@@ -16,8 +16,6 @@ var showAuthButton = function(){
   var url = "https://instagram.com/oauth/authorize/?client_id=fdd685e3f1674541bf50829b962e9d1d&redirect_uri=" + window.location.origin   + "/src/auth/finished.html&response_type=token&scope=likes+relationships";
   $("#authLink").attr('href', url);
   $(".auth-button").removeClass('hidden');
-
-  window.clearInterval(authInterval);
 };
 
 var getAuth = function(){
@@ -25,7 +23,7 @@ var getAuth = function(){
   if (authCode.length !== 0){
     $(".auth-button").addClass("hidden");
     getInstagramFeed();
-    if ($(".first-row").text().trim().length !== 0){
+    if ($(".first-row").text().length !== 0){
       _log("clearing auth interval");
       window.clearInterval(authInterval);
     }
@@ -75,10 +73,10 @@ var displayFeed = function(feed){
 // handle intervals better
 var authInterval = '';
 var runInterval = function(){
-  authInterval = window.setInterval(getAuth, 100);
+  authInterval = window.setInterval(getAuth, 500);
 };
 
 $(document).ready(function(){
-  _log("running display feed");
+  // _log("running display feed");
   runInterval();
 });
