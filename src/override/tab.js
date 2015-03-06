@@ -1,3 +1,5 @@
+// get client_id from grunt
+// var CLIENT_ID = "";
 var app = chrome.runtime.getManifest();
 
 var authCode = '';
@@ -13,13 +15,12 @@ var _log = function(data){
 };
 
 var showAuthButton = function(){
-  var url = "https://instagram.com/oauth/authorize/?client_id=fdd685e3f1674541bf50829b962e9d1d&redirect_uri=" + window.location.origin   + "/src/auth/finished.html&response_type=token&scope=likes+relationships";
+  var url = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID + "&redirect_uri=" + window.location.origin   + "/src/auth/finished.html&response_type=token&scope=likes+relationships";
   $("#authLink").attr('href', url);
   $(".auth-button").removeClass('hidden');
 };
 
 var getAuth = function(){
-  showAuthButton();
   if (authCode.length !== 0){
     $(".auth-button").addClass("hidden");
     getInstagramFeed();
@@ -28,6 +29,7 @@ var getAuth = function(){
       window.clearInterval(authInterval);
     }
   } else {
+    console.log("...showing auth button...")
     showAuthButton();
   }
 
