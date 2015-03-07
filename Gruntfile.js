@@ -42,9 +42,21 @@ module.exports = function(grunt) {
     },
     concat: {
       dist: {
-        src: ['dist/src/auth/finished.js', 'dist/src/auth/start.js', 'dist/src/override/tab.js', 'dist/src/options/options.js'],
-        dest: 'dist/build.js',
+        src: [
+              'dist/src/init/init.js',
+              'dist/src/auth/finished.js',
+              'dist/src/auth/start.js',
+              'dist/src/override/tab.js',
+              'dist/src/options/options.js'
+             ],
+        dest: 'dist/build.js'
       },
+    },
+    watch: {
+      css: {
+        files: 'src/**/*.js',
+        tasks: ['dev']
+      }
     }
   });
 
@@ -54,7 +66,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify']);
+
   grunt.registerTask('prod', ['includereplace:prod', 'concat']);
   grunt.registerTask('dev', ['includereplace:dev', 'concat']);
 };

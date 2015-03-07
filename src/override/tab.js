@@ -1,7 +1,3 @@
-// get client_id from grunt
-// var CLIENT_ID = "";
-var app = chrome.runtime.getManifest();
-
 var authCode = '';
 chrome.storage.local.get('auth', function(code){
   authCode = code.auth;
@@ -31,6 +27,10 @@ var getAuth = function(){
   } else {
     console.log("...showing auth button...")
     showAuthButton();
+    authButtonCounter++;
+    if (authButtonCounter > 5) {
+      window.clearInterval(authInterval);
+    }
   }
 
 }

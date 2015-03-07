@@ -1,7 +1,4 @@
-// get client id from grunt, make it global
-// var CLIENT_ID = "";
-var url = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID + "&redirect_uri=" + window.location.origin   + "/src/auth/finished.html&response_type=token&scope=likes+relationships";
-$("#authLink").attr('href', url);
+$("#authLink").attr('href', AUTH_URL);
 var authCode = false;
 chrome.storage.local.get('auth', function(code){
   authCode = code.auth;
