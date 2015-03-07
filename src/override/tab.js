@@ -3,17 +3,11 @@ chrome.storage.local.get('auth', function(code){
   authCode = code.auth;
 });
 
-// internal log function, displays logs on the page
-var _log = function(data){
-  if (typeof(data) !== "object"){
-    $(".log").text(data);
-  };
-};
-
 var showAuthButton = function(){
   var url = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID + "&redirect_uri=" + window.location.origin   + "/src/auth/finished.html&response_type=token&scope=likes+relationships";
   $("#authLink").attr('href', url);
   $(".auth-button").removeClass('hidden');
+  {{log}}("Auth button display: #" + (authButtonCounter + 1));
 };
 
 var getAuth = function(){
@@ -21,14 +15,13 @@ var getAuth = function(){
     $(".auth-button").addClass("hidden");
     getInstagramFeed();
     if ($(".first-row").text().length !== 0){
-      _log("clearing auth interval");
+      {{log}}("clearing auth interval");
       window.clearInterval(authInterval);
     }
   } else {
-    console.log("...showing auth button...")
     showAuthButton();
     authButtonCounter++;
-    if (authButtonCounter > 5) {
+    if (authButtonCounter >= 5) {
       window.clearInterval(authInterval);
     }
   }
@@ -51,7 +44,7 @@ var getInstagramFeed = function(){
 
 var displayFeed = function(feed){
   if ($(".first-row").text().length > 5){
-    _log("clearing auth interval");
+    {{log}}("clearing auth interval");
     window.clearInterval(authInterval);
     return;
   }
@@ -66,10 +59,10 @@ var displayFeed = function(feed){
       $el.append($username).append($photo);
       if (i < 4){
         $(".first-row").append($el);
-        console.log('adding to first row');
+        {{log}}('adding to first row');
       } else {
         $(".second-row").append($el);
-        console.log('adding to 2nd row');
+        {{log}}('adding to 2nd row');
       }
     }
   }
@@ -82,6 +75,6 @@ var runInterval = function(){
 };
 
 $(document).ready(function(){
-  // _log("running display feed");
+  // {{log}}("running display feed");
   runInterval();
 });

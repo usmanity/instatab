@@ -7,6 +7,7 @@ var authButtonCounter = 0;
 var authCode = '';
 
 
+// save and retrieve from chrome local storage
 function setAuth(){
   chrome.storage.local.set({ 'auth': authCode });
 }
@@ -14,3 +15,10 @@ function setAuth(){
 function getAuth(){
   chrome.storage.local.get('auth');
 }
+
+// a log in the dom
+var _log = function(data){
+  if (typeof(data) !== "object"){
+    $(".log").text(data);
+  };
+};
