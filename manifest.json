@@ -17,7 +17,7 @@
   "permissions": [
     "storage"
   ],
-  "content_security_policy": "script-src 'self' https://api.instagram.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://api.instagram.com https://www.google-analytics.com/; object-src 'self'",
   "web_accessible_resources": [
     "src/auth/finished.html"
   ]
