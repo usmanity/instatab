@@ -1,17 +1,29 @@
-$("#authLink").attr('href', AUTH_URL);
-var authCode = false;
-chrome.storage.local.get('auth', function(code){
-  authCode = code.auth;
-  if (authCode !== ""){
-    $("#loggedOut").addClass("hidden");
-  } else {
-    $("#loggedIn").addClass("hidden");
-  }
-});
+if (getPage() === "options"){
+  $("#authLink").attr('href', AUTH_URL);
+  var intervalCounter = 0;
 
-$("#disconnect").click(function(){
-  chrome.storage.local.set({'auth': ''});
-  authCode = '';
-  $("#disconnected").removeClass("hidden");
-  $("#loggedIn").addClass("hidden");
-});
+  getAuth();
+
+  pageInterval = window.setInterval(function(){
+    if (authCode === ""){
+      $("#loggedIn").addClass("hidden");
+      $("#loggedOut").removeClass("hidden");
+    } else {
+      $("#loggedIn").removeClass("hidden");
+      $("#loggedOut").addClass("hidden");
+    }
+    if (intervalCounter > 4){
+      window.clearInterval(pageInterval);
+    } else {
+      intervalCounter++;
+    }
+    console.log(authCode);
+  }, 500);
+
+  $("#disconnect").click(function(){
+    setAuth('');
+    $("#disconnected").removeClass("hidden");
+    $("#loggedOut").removeClass("hidden");
+    $("#loggedIn").addClass("hidden");
+  });
+}

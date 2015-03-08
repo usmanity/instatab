@@ -4,17 +4,17 @@
 	<title>Options</title>
 	<link rel="stylesheet" href="/src/styles/styles.css" media="screen" charset="utf-8">
 </head>
-<body>
+<body data-page="options">
 	<h1>Options</h1>
 	<div class="auth">
 		<div class="logged-in" id="loggedIn">
 			You're authenticated with Instagram (<a href="#" id="disconnect">disconnect</a>).
 		</div>
-		<div class="logged-out" id="loggedOut">
-			<a href="#" id="authLink">Login with Instagram</a>
-		</div>
 		<div class="hidden" id="disconnected">
 			You've disconnected from Instagram.
+		</div>
+		<div class="logged-out" id="loggedOut">
+			<a href="#" id="authLink">Login with Instagram</a>
 		</div>
 	</div>
 	<script charset="utf-8" src="/js/jquery/jquery.min.js"></script>

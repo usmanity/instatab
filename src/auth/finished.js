@@ -1,4 +1,4 @@
-var code = document.getElementById("code");
-// var authCode = window.location.href.split('#')[1].split("=")[1];
-
-setAuth();
+if (getPage() === "finished"){
+  access_token = location.hash.split("=")[1];
+  setAuth(access_token);
+}
