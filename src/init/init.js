@@ -21,7 +21,6 @@ function getPage(){
   return $('body').data('page');
 }
 
-// private functions
 // a log in the dom
 var _log = function(data){
   if (typeof(data) !== "object"){

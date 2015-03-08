@@ -16,12 +16,16 @@ var displayFeed = function(feed){
   for (var i = 0; i < 8; i++){
     if (feed.data[i].type === "image"){
       var post = feed.data[i];
+      console.log(post);
       var imageUrl = post.images.standard_resolution.url;
-      var username = post.user.username;
+      var username = post.user;
       var $el = $("<div class='photo'></div>");
       var $photo = $("<img src='" + imageUrl + "'>")
-      var $username = $("<span class='username'>" + username + "</span>");
-      $el.append($username).append($photo);
+      var $username = $("<a class='username'>" + username.username + "</a>");
+      $username.css({
+        "background-image": "url(" + username.profile_picture + ")"
+      }).attr("href", "https://instagram.com/" + username.username)
+      $el.append($photo);
       if (i < 4){
         $(".first-row").append($el);
       } else {
@@ -41,8 +45,8 @@ if (getPage() === 'tab'){
     } else {
       $('.auth-button').removeClass('hidden')
     }
-    if (intervalCounter > 4){
+    if (intervalCounter > 9){
       window.clearInterval(getAuthInterval);
     }
-  }, 50);
+  }, 25);
 }
