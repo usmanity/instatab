@@ -45,7 +45,8 @@ module.exports = function(grunt) {
               'dist/src/auth/finished.js',
               'dist/src/auth/start.js',
               'dist/src/override/tab.js',
-              'dist/src/options/options.js'
+              'dist/src/options/options.js',
+              'dist/src/init/analytics.js'
              ],
         dest: 'dist/build.js'
       }
