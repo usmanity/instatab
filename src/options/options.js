@@ -17,7 +17,6 @@ if (getPage() === "options"){
     } else {
       intervalCounter++;
     }
-    console.log(authCode);
   }, 500);
 
   $("#disconnect").click(function(){

@@ -16,7 +16,7 @@ var displayFeed = function(feed){
   for (var i = 0; i < 8; i++){
     if (feed.data[i].type === "image"){
       var post = feed.data[i];
-      console.log(post);
+      // console.log(post);
       var imageUrl = post.images.standard_resolution.url;
       var username = post.user;
       var $el = $("<div class='photo'></div>");
@@ -25,6 +25,9 @@ var displayFeed = function(feed){
       $username.css({
         "background-image": "url(" + username.profile_picture + ")"
       }).attr("href", "https://instagram.com/" + username.username)
+      if (post.user_has_liked){
+        $heart.addClass('liked');
+      }
       $el.append($photo);
       if (i < 4){
         $(".first-row").append($el);
@@ -36,9 +39,10 @@ var displayFeed = function(feed){
 };
 
 if (getPage() === 'tab'){
+  $("#authLink").attr("href", AUTH_URL)
   getAuthInterval = window.setInterval(function(){
     getAuth();
-    if (authCode !== undefined){
+    if (authCode !== undefined && authCode !== ""){
       getInstagramFeed();
       $('.auth-button').addClass('hidden')
       window.clearInterval(getAuthInterval);

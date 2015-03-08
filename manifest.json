@@ -1,6 +1,6 @@
 {
   "name": "Tabby",
-  "version": "0.6.3",
+  "version": "0.6.8",
   "manifest_version": 2,
   "description": "See your Instagram news feed right in your new tab",
   "homepage_url": "http://usmanity.com",
@@ -14,24 +14,6 @@
   "chrome_url_overrides": {
     "newtab": "src/override/override.html"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://www.google.com/*"
-      ],
-      "css": [
-        "src/inject/inject.css"
-      ]
-    },
-    {
-      "matches": [
-        "https://www.google.com/*"
-      ],
-      "js": [
-        "src/inject/inject.js"
-      ]
-    }
-  ],
   "permissions": [
     "storage"
   ],

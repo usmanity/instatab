@@ -1,6 +1,6 @@
 // constants from config
 var CLIENT_ID = "{{client_id}}";
-var REDIRECT_URI = "{{redirect_uri}}";
+var REDIRECT_URI = "chrome-extension://"+ window.location.origin.split("//")[1] +"/src/auth/finished.html";
 var AUTH_URL = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URI + "&response_type=token&scope=likes+relationships";
 
 var app = chrome.runtime.getManifest();

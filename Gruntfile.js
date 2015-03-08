@@ -1,8 +1,6 @@
 var fs = require('fs');
 var obj = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
-console.log(obj);
-
 module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
@@ -85,7 +83,7 @@ module.exports = function(grunt) {
       prod: {
         files: [{
             expand: true,
-            src: ['src/**/*.html', 'src/**/*.css'],
+            src: ['src/**/*.html', 'src/**/*.css', 'icons/**', 'js/**'],
             dest: 'prod/',
             filter: 'isFile'
         }]
@@ -102,7 +100,7 @@ module.exports = function(grunt) {
           archive: 'tabby.zip'
         },
         files: [
-          {expand: true, cwd: '.', src: ['prod/**'], dest: 'prod/'}, // makes all src relative to cwd
+          {expand: true, cwd: '.', src: ['prod/**'], dest: '.'}, // makes all src relative to cwd
         ]
       }
     }
