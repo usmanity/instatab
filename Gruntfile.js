@@ -25,7 +25,7 @@ module.exports = function(grunt) {
           includesDir: 'src/'
         },
         files: [
-          {src: 'src/**/*.js', dest: 'prod/dist/', expand: true, cwd: '.'}
+          {src: 'src/**/*', dest: 'prod/dist/', expand: true, cwd: '.'}
         ]
       }
     },
@@ -40,6 +40,17 @@ module.exports = function(grunt) {
               'dist/src/init/analytics.js'
              ],
         dest: 'dist/build.js'
+      },
+      prod: {
+        src: [
+              'prod/dist/src/init/init.js',
+              'prod/dist/src/auth/finished.js',
+              'prod/dist/src/auth/start.js',
+              'prod/dist/src/override/tab.js',
+              'prod/dist/src/options/options.js',
+              'prod/dist/src/init/analytics.js'
+             ],
+        dest: 'prod/dist/build.js'
       }
     },
     watch: {
@@ -51,7 +62,7 @@ module.exports = function(grunt) {
     uglify: {
       prod: {
         files: {
-          'prod/dist/build.js': 'dist/build.js'
+          'prod/dist/build.js': 'prod/dist/build.js'
         }
       }
     },
@@ -108,6 +119,6 @@ module.exports = function(grunt) {
 
   // Default task(s).
 
-  grunt.registerTask('prod', ['includereplace:prod', 'uglify:prod', 'copy:main', 'copy:prod', 'clean:prod', 'compress:main']);
+  grunt.registerTask('prod', ['includereplace:prod', 'concat:prod', 'copy:prod', 'clean:prod', 'compress:main']);
   grunt.registerTask('dev', ['includereplace:dev', 'concat:dev', 'copy:dev']);
 };
