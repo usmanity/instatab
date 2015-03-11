@@ -16,11 +16,10 @@ var displayFeed = function(feed){
   for (var i = 0; i < 8; i++){
     if (feed.data[i].type === "image"){
       var post = feed.data[i];
-      // console.log(post);
       var imageUrl = post.images.standard_resolution.url;
       var username = post.user;
       var $el = $("<div class='photo'></div>");
-      var $photo = $("<img src='" + imageUrl + "'>")
+      var $photo = $("<a class='photo-container' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
       var $username = $("<a class='username'>" + username.username + "</a>");
       $username.css({
         "background-image": "url(" + username.profile_picture + ")"
@@ -28,7 +27,7 @@ var displayFeed = function(feed){
       if (post.user_has_liked){
         $heart.addClass('liked');
       }
-      $el.append($photo);
+      $el.append($username).append($photo);
       if (i < 4){
         $(".first-row").append($el);
       } else {

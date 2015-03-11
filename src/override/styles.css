@@ -1,6 +1,7 @@
 body, html {
   padding: 0;
   margin: 0;
+  margin-left: 5px;
 }
 .hidden {
   display: none !important;
@@ -14,7 +15,7 @@ body, html {
   margin: 10px auto;
 }
 .photo img {
-  width: 100%;
+  width: 95%;
 }
 .feed {
   height: 100%;
@@ -36,4 +37,21 @@ body, html {
   top: 0;
   right: 0;
   font-size: 14px;
+}
+.username {
+  display: inline-block;
+  width: 80%;
+  height: 30px;
+  background-size: 30px;
+  background-repeat: no-repeat;
+  padding-left: 37px;
+  margin: 2px 0;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  line-height: 29px;
+}
+.username:hover {
+  cursor: pointer;
 }

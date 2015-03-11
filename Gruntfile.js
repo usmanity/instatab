@@ -5,15 +5,6 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    watch: {
-      script: {
-        files: ['src/**/*.html', 'src/**/*.js'],
-        tasks: ['includereplace:dev', 'concat'],
-        options: {
-          spawn: false
-        }
-      }
-    },
     includereplace: {
       dev: {
         options: {
@@ -53,7 +44,7 @@ module.exports = function(grunt) {
     },
     watch: {
       js: {
-        files: 'src/**/*.js',
+        files: ['src/**/*'],
         tasks: ['dev']
       }
     },
