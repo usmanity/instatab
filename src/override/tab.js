@@ -14,9 +14,6 @@ var getInstagramFeed = function(){
 
 var displayFeed = function(feed){
   for (var i = 0; i < 8; i++){
-
-    console.log(feed.data[i].type);
-
       var post = feed.data[i];
       var imageUrl = post.images.standard_resolution.url;
       var username = post.user;
@@ -24,8 +21,12 @@ var displayFeed = function(feed){
       if (feed.data[i].type === "image"){
         var $container = $("<a class='photo' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
       } else {
-        var $container = $("<a class='video' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
-        $container.append("<span class='play'></span>")
+        var videoUrl = post.videos.standard_resolution.url;
+        // var $container = $("<a class='video' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
+        var $container = $("<video controls poster=" + imageUrl + " src='" + videoUrl + "'></video>");
+        // $container.append("<span class='play'></span>");
+        debugger;
+        feed.data[i];
       }
       var $username = $("<a class='username'>" + username.username + "</a>");
       $username.css({
