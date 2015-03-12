@@ -70,7 +70,7 @@ module.exports = function(grunt) {
       main: {
         files: [{
           expand: true,
-          src: ['manifest.json', '_locales/**'],
+          src: ['manifest.json', '_locales/**', 'images/'],
           dest: 'prod/',
           filter: 'isFile'
         }]
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
       dev: {
         files: [{
             expand: true,
-            src: ['src/**/*.html', 'src/**/*.css'],
+            src: ['src/**/*.html', 'src/**/*.css', 'images/'],
             dest: 'dist/',
             filter: 'isFile'
         }]
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
       prod: {
         files: [{
             expand: true,
-            src: ['src/**/*.html', 'src/**/*.css', 'icons/**', 'js/**'],
+            src: ['src/**/*.html', 'src/**/*.css', 'icons/**', 'js/**', 'manifest.json', '_locales/**', 'images/'],
             dest: 'prod/',
             filter: 'isFile'
         }]

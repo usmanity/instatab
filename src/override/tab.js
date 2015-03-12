@@ -14,26 +14,32 @@ var getInstagramFeed = function(){
 
 var displayFeed = function(feed){
   for (var i = 0; i < 8; i++){
-    if (feed.data[i].type === "image"){
+
+    console.log(feed.data[i].type);
+
       var post = feed.data[i];
       var imageUrl = post.images.standard_resolution.url;
       var username = post.user;
-      var $el = $("<div class='photo'></div>");
-      var $photo = $("<a class='photo-container' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
+      var $el = $("<div class='container'></div>");
+      if (feed.data[i].type === "image"){
+        var $container = $("<a class='photo' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
+      } else {
+        var $container = $("<a class='video' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
+        $container.append("<span class='play'></span>")
+      }
       var $username = $("<a class='username'>" + username.username + "</a>");
       $username.css({
         "background-image": "url(" + username.profile_picture + ")"
       }).attr("href", "https://instagram.com/" + username.username)
-      if (post.user_has_liked){
-        $heart.addClass('liked');
-      }
-      $el.append($username).append($photo);
+      // if (post.user_has_liked){
+      //   $heart.addClass('liked');
+      // }
+      $el.append($username).append($container);
       if (i < 4){
         $(".first-row").append($el);
       } else {
         $(".second-row").append($el);
       }
-    }
   }
 };
 

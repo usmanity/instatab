@@ -1,7 +1,13 @@
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+(function(e,t){var r=e.amplitude||{};var n=t.createElement("script");n.type="text/javascript";
+  n.async=true;n.src="https://d24n15hnbwhuhn.cloudfront.net/libs/amplitude-2.0.4-min.js";
+  var s=t.getElementsByTagName("script")[0];s.parentNode.insertBefore(n,s);r._q=[];
+  function a(e){r[e]=function(){r._q.push([e].concat(Array.prototype.slice.call(arguments,0)))
+  }}var i=["init","logEvent","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId","setGlobalUserProperties"];
+  for(var o=0;o<i.length;o++){a(i[o])}e.amplitude=r})(window,document);
 
-ga('create', '{{analytics_id}}', 'auto');
-ga('send', 'pageview');
+  amplitude.init("{{amplitude_key}}");
+
+  var eventProperties = {
+    appVersion: app.version
+  };
+  amplitude.logEvent("opened new tab", eventProperties);

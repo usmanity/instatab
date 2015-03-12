@@ -9,12 +9,15 @@ body, html {
 .auth-button {
 
 }
-.photo {
+.photo, .video {
+  position: relative;
+}
+.container {
   width: 25%;
   float: left;
   margin: 10px auto;
 }
-.photo img {
+.container img {
   width: 95%;
 }
 .feed {
