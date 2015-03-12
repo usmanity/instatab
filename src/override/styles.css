@@ -31,7 +31,7 @@ body, html {
   float: left;
   margin: 10px auto;
 }
-.container img, .contaner video {
+.container img, .container video {
   width: 95%;
 }
 .feed {

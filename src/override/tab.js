@@ -23,9 +23,8 @@ var displayFeed = function(feed){
       } else {
         var videoUrl = post.videos.standard_resolution.url;
         // var $container = $("<a class='video' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
-        var $container = $("<video controls poster=" + imageUrl + " src='" + videoUrl + "'></video>");
+        var $container = $("<video controls loop preload='true' src='" + videoUrl + "'></video>");
         // $container.append("<span class='play'></span>");
-        debugger;
         feed.data[i];
       }
       var $username = $("<a class='username'>" + username.username + "</a>");
