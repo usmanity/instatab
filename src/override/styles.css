@@ -7,8 +7,26 @@ body, html {
 .hidden {
   display: none !important;
 }
-.auth-button {
-
+.auth-button a{
+  margin: 48vh auto;
+  width: 220px;
+  text-align: center;
+  border: 1px solid;
+  padding: 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: block;
+  background-color: #2ECC71;
+  color: white;
+  font-size: 1.7em;
+  padding-left: 50px;
+  background-size: 30px;
+  background-position: 24px;
+  background-image: url('/images/instagram.png');
+  background-repeat: no-repeat;
+}
+.auth-button a:hover {
+  background-color: #58d68d;
 }
 .photo, .video {
   position: relative;

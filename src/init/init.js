@@ -44,3 +44,15 @@ var _log = function(data){
 };
 
 console.info("Thanks for using Tabby, you're running on version " + app.version);
+
+
+// to options page for new users
+var first_run = false;
+if (!localStorage['ran_before']) {
+  first_run = true;
+  localStorage['ran_before'] = '1';
+}
+
+if (first_run) {
+  chrome.tabs.create({url: "src/options/index.html"});
+}
