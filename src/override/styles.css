@@ -59,9 +59,7 @@ body, html {
   display: inline-block;
   width: 80%;
   height: 30px;
-  background-size: 30px;
-  background-repeat: no-repeat;
-  padding-left: 37px;
+
   margin: 2px 0;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -71,4 +69,13 @@ body, html {
 }
 .username:hover {
   cursor: pointer;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  background-size: 30px;
+  border-radius: 15px;
+  float: left;
+  margin-right: 8px;
 }

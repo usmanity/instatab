@@ -28,9 +28,10 @@ var displayFeed = function(feed){
         feed.data[i];
       }
       var $username = $("<a class='username'>" + username.username + "</a>");
-      $username.css({
+      var $avatar = $("<span class='avatar'></span>").css({
         "background-image": "url(" + username.profile_picture + ")"
-      }).attr("href", "https://instagram.com/" + username.username)
+      });
+      $username.prepend($avatar);
       // if (post.user_has_liked){
       //   $heart.addClass('liked');
       // }
