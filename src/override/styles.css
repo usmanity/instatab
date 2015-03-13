@@ -2,6 +2,7 @@ body, html {
   padding: 0;
   margin: 0;
   margin-left: 5px;
+  font-family: 'Helvetica Neue', Helvetica, 'San Francisco', Roboto, sans-serif;
 }
 .hidden {
   display: none !important;
@@ -58,24 +59,32 @@ body, html {
 .username {
   display: inline-block;
   width: 80%;
-  height: 30px;
-
-  margin: 2px 0;
+  height: 34px;
+  margin: -2px 0 2px 9px;
   text-decoration: none;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
   line-height: 29px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: #125688;
 }
 .username:hover {
   cursor: pointer;
+}
+.username:active, .username:visited {
+  color: #125688;
 }
 .avatar {
   width: 30px;
   height: 30px;
   display: inline-block;
   background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
   border-radius: 15px;
   float: left;
   margin-right: 8px;
+  border: 1px solid #D8D8D8;
 }

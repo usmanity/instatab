@@ -22,12 +22,10 @@ var displayFeed = function(feed){
         var $container = $("<a class='photo' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
       } else {
         var videoUrl = post.videos.standard_resolution.url;
-        // var $container = $("<a class='video' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
         var $container = $("<video controls loop preload='true' src='" + videoUrl + "'></video>");
-        // $container.append("<span class='play'></span>");
         feed.data[i];
       }
-      var $username = $("<a class='username'>" + username.username + "</a>");
+      var $username = $("<a class='username'>" + username.username + "</a>").attr("href", "https://instagram.com/" + username.username);
       var $avatar = $("<span class='avatar'></span>").css({
         "background-image": "url(" + username.profile_picture + ")"
       });

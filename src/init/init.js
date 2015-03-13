@@ -27,3 +27,5 @@ var _log = function(data){
     $(".log").text(data);
   };
 };
+
+console.info("Thanks for using Tabby, you're running on version " + app.version);
