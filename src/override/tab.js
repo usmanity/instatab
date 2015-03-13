@@ -15,6 +15,7 @@ var getInstagramFeed = function(){
 var displayFeed = function(feed){
   for (var i = 0; i < 8; i++){
       var post = feed.data[i];
+      var timeSince = processTime(post.caption.created_time);
       var imageUrl = post.images.standard_resolution.url;
       var username = post.user;
       var $el = $("<div class='container'></div>");
@@ -29,7 +30,8 @@ var displayFeed = function(feed){
       var $avatar = $("<span class='avatar'></span>").css({
         "background-image": "url(" + username.profile_picture + ")"
       });
-      $username.prepend($avatar);
+      var $time = $("<span class='time'>"+ timeSince +"</span>");
+      $username.prepend($avatar).append($time);
       // if (post.user_has_liked){
       //   $heart.addClass('liked');
       // }
@@ -39,6 +41,7 @@ var displayFeed = function(feed){
       } else {
         $(".second-row").append($el);
       }
+      {{timer_end}}
   }
 };
 

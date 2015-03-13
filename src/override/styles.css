@@ -58,7 +58,7 @@ body, html {
 }
 .username {
   display: inline-block;
-  width: 80%;
+  width: 92%;
   height: 34px;
   margin: -2px 0 2px 9px;
   text-decoration: none;
@@ -87,4 +87,8 @@ body, html {
   float: left;
   margin-right: 8px;
   border: 1px solid #D8D8D8;
+}
+.time {
+  float: right;
+  color: #A5A7AA;
 }

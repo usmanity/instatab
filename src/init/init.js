@@ -1,3 +1,4 @@
+{{timer_start}}
 // constants from config
 var CLIENT_ID = "{{client_id}}";
 var REDIRECT_URI = "chrome-extension://"+ window.location.origin.split("//")[1] +"/src/auth/finished.html";
@@ -19,6 +20,20 @@ function getAuth(){
 }
 function getPage(){
   return $('body').data('page');
+}
+function processTime(ms){
+  var seconds = ms * 1000;
+  var timeSince = moment(seconds).fromNow(true);
+  var now = moment();
+  var diffInSeconds = now.diff(moment(seconds), 'seconds');
+  var diffInMinutes = now.diff(moment(seconds), 'minutes');
+  if (diffInMinutes > 60 || timeSince.indexOf('hour') !== -1){
+    return Math.round(parseFloat(diffInMinutes / 60)) + 'h';
+  } else if (timeSince.indexOf('minute') === -1){
+    return diffInSeconds + 's';
+  } else {
+    return diffInMinutes + 'm';
+  }
 }
 
 // a log in the dom
