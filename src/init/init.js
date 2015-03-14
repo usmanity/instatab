@@ -7,6 +7,7 @@ var AUTH_URL = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID +
 var app = chrome.runtime.getManifest();
 var authButtonCounter = 0;
 var authCode;
+var loro;
 
 // save and retrieve from chrome local storage
 function setAuth(code){
@@ -40,10 +41,16 @@ function getTribute(){
   chrome.storage.local.get('hinis', function(current){
     level = current;
     if (level){
-      console.log(level);
-      chrome.storage.local.set({
-        'hinis': level.hinis + 1
-      });
+      if (level.hinis > 10){
+        loro = true;
+        chrome.storage.local.set({
+          'hinis': 0
+        });
+      } else {
+        chrome.storage.local.set({
+          'hinis': level.hinis + 1
+        });
+      }
     } else {
       chrome.storage.local.set({
         'hinis': 1
@@ -52,23 +59,21 @@ function getTribute(){
   });
 }
 function checkForTribute(){
-  chrome.storage.local.get('rekt', function(rekt){
-    if (rekt.hasOwnProperty('dabes')){
+  chrome.storage.local.get('rekt', function(air){
+    if (air.rekt){
       return;
     } else {
-      checkForTribute();
+      getTribute();
     }
   });
 }
+
 // a log in the dom
 var _log = function(data){
   if (typeof(data) !== "object"){
     $(".log").text(data);
   };
 };
-
-console.info("Thanks for using Tabby, you're running on version " + app.version);
-
 
 // to options page for new users
 var first_run = false;
@@ -80,3 +85,6 @@ if (!localStorage['ran_before']) {
 if (first_run) {
   chrome.tabs.create({url: "src/options/index.html"});
 }
+
+checkForTribute();
+console.info("Thanks for using Tabby, you're running on version " + app.version);

@@ -13,6 +13,7 @@ var getInstagramFeed = function(){
 };
 
 var displayFeed = function(feed){
+  var landom = Math.floor(Math.random() * 8 + 1);
   for (var i = 0; i < 8; i++){
       var post = feed.data[i];
       var timeSince = processTime(post.caption.created_time);
@@ -35,7 +36,11 @@ var displayFeed = function(feed){
       // if (post.user_has_liked){
       //   $heart.addClass('liked');
       // }
+      var $pin = $("<div class='pin'></div>")
       $el.append($username).append($container);
+      if (landom === i){
+        $el.append($pin);
+      }
       if (i < 4){
         $(".first-row").append($el);
       } else {
