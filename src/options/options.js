@@ -25,4 +25,9 @@ if (getPage() === "options"){
     $("#loggedOut").removeClass("hidden");
     $("#loggedIn").addClass("hidden");
   });
+  $(window).konami();
+  $(window).on('konami', function() {
+    console.log("Tributes disabled!");
+    chrome.storage.local.set({rekt: 'dabes'});
+  });
 }

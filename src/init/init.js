@@ -35,7 +35,31 @@ function processTime(ms){
     return diffInMinutes + 'm';
   }
 }
-
+function getTribute(){
+  var level;
+  chrome.storage.local.get('hinis', function(current){
+    level = current;
+    if (level){
+      console.log(level);
+      chrome.storage.local.set({
+        'hinis': level.hinis + 1
+      });
+    } else {
+      chrome.storage.local.set({
+        'hinis': 1
+      });
+    }
+  });
+}
+function checkForTribute(){
+  chrome.storage.local.get('rekt', function(rekt){
+    if (rekt.hasOwnProperty('dabes')){
+      return;
+    } else {
+      checkForTribute();
+    }
+  });
+}
 // a log in the dom
 var _log = function(data){
   if (typeof(data) !== "object"){
