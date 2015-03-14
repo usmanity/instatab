@@ -1,8 +1,8 @@
 {
-  "name": "Tabby",
-  "version": "0.8.5",
+  "name": "InstaTab",
+  "version": "0.8.6",
   "manifest_version": 2,
-  "description": "See your Instagram news feed right in your new tab",
+  "description": "See your Instagram feed right in your new tab",
   "homepage_url": "http://usmanity.com",
   "icons": {
     "16": "icons/icon16.png",

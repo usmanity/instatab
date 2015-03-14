@@ -16,7 +16,7 @@ var displayFeed = function(feed){
   var landom = Math.floor(Math.random() * 8 + 1);
   for (var i = 0; i < 8; i++){
       var post = feed.data[i];
-      var timeSince = processTime(post.caption.created_time);
+      var timeSince = processTime(post.created_time);
       var imageUrl = post.images.standard_resolution.url;
       var username = post.user;
       var $el = $("<div class='container'></div>");
@@ -46,8 +46,8 @@ var displayFeed = function(feed){
       } else {
         $(".second-row").append($el);
       }
-      {{timer_end}}
   }
+  {{timer_end}}
 };
 
 if (getPage() === 'tab'){
