@@ -108,5 +108,5 @@ body, html {
 }
 .time {
   float: right;
-  color: #A5A7AA;
+  color: rgba(165, 167, 170, 0.7);
 }

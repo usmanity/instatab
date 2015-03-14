@@ -78,7 +78,7 @@ module.exports = function(grunt) {
       dev: {
         files: [{
             expand: true,
-            src: ['src/**/*.html', 'src/**/*.css', 'images/'],
+            src: ['src/**/*.html', 'src/**/*.css', 'images/*'],
             dest: 'dist/',
             filter: 'isFile'
         }]
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
       prod: {
         files: [{
             expand: true,
-            src: ['src/**/*.html', 'src/**/*.css', 'icons/**', 'js/**', 'manifest.json', '_locales/**', 'images/'],
+            src: ['src/**/*.html', 'src/**/*.css', 'icons/**', 'js/**', 'manifest.json', '_locales/**', 'images/*'],
             dest: 'prod/',
             filter: 'isFile'
         }]
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
     compress: {
       main: {
         options: {
-          archive: 'tabby.zip'
+          archive: 'instatab.zip'
         },
         files: [
           {expand: true, cwd: '.', src: ['prod/**'], dest: '.'}, // makes all src relative to cwd

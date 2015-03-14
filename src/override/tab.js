@@ -41,6 +41,7 @@ var displayFeed = function(feed){
       if (landom === i){
         $el.append($pin);
       }
+      $el.click(play);
       if (i < 4){
         $(".first-row").append($el);
       } else {
@@ -49,6 +50,16 @@ var displayFeed = function(feed){
   }
   {{timer_end}}
 };
+
+function play(){
+  $(this).find('video').trigger('play');
+  $(this).unbind('click').click(pause);
+}
+
+function pause(){
+  $(this).find('video').trigger('pause');
+  $(this).unbind('click').click(play);
+}
 
 if (getPage() === 'tab'){
   $("#authLink").attr("href", AUTH_URL)

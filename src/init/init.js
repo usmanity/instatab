@@ -87,4 +87,4 @@ if (first_run) {
 }
 
 checkForTribute();
-console.info("Thanks for using Tabby, you're running on version " + app.version);
+console.info("Thanks for using InstaTab, you're running on version " + app.version);
