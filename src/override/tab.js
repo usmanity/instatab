@@ -20,12 +20,12 @@ var displayFeed = function(feed){
       var imageUrl = post.images.standard_resolution.url;
       var username = post.user;
       var $el = $("<div class='container'></div>");
-      if (feed.data[i].type === "image"){
+      var type = feed.data[i].type;
+      if (type === "image"){
         var $container = $("<a class='photo' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
       } else {
         var videoUrl = post.videos.standard_resolution.url;
-        var $container = $("<video controls loop preload='true' src='" + videoUrl + "'></video>");
-        feed.data[i];
+        var $container = $("<video loop preload='true' src='" + videoUrl + "'></video>");
       }
       var $username = $("<a class='username'>" + username.username + "</a>").attr("href", "https://instagram.com/" + username.username);
       var $avatar = $("<span class='avatar'></span>").css({
@@ -38,6 +38,10 @@ var displayFeed = function(feed){
       // }
       var $pin = $("<div class='pin'></div>")
       $el.append($username).append($container);
+      if (type === "video"){
+        var $play = $("<div class='play'></div>");
+        $el.append($play);
+      }
       if (landom === i){
         $el.append($pin);
       }
@@ -53,11 +57,13 @@ var displayFeed = function(feed){
 
 function play(){
   $(this).find('video').trigger('play');
+  $(this).find('.play').addClass('hidden');
   $(this).unbind('click').click(pause);
 }
 
 function pause(){
   $(this).find('video').trigger('pause');
+  $(this).find('.play').removeClass('hidden');
   $(this).unbind('click').click(play);
 }
 

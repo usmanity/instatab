@@ -49,6 +49,7 @@ body, html {
   width: 25%;
   float: left;
   margin: 10px auto;
+  position: relative;
 }
 .container img, .container video {
   width: 95%;
