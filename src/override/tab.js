@@ -52,6 +52,11 @@ var displayFeed = function(feed){
         $(".second-row").append($el);
       }
   }
+  getSettings().then(function(settings){
+    console.log(settings);
+    var loopSetting = settings.loop === 'true';
+    $("video").attr('loop', loopSetting);
+  })
   {{timer_end}}
 };
 
@@ -66,7 +71,18 @@ function pause(){
   $(this).find('.play').removeClass('hidden');
   $(this).unbind('click').click(play);
 }
+function getSettings(){
+  return new Promise(function (fulfill, reject){
+    chrome.storage.local.get('options', function(cb){
+      var options = cb.options;
+      if (!options) {
+        reject();
+      }
+      fulfill(options);
+    });
+  })
 
+}
 if (getPage() === 'tab'){
   $("#authLink").attr("href", AUTH_URL)
   getAuthInterval = window.setInterval(function(){

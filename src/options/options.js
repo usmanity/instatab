@@ -1,7 +1,8 @@
 if (getPage() === "options"){
   $("#authLink").attr('href', AUTH_URL);
   var intervalCounter = 0;
-
+  var settings = {};
+  var $loopSettings = $("input[name='loop']");
   getAuth();
 
   pageInterval = window.setInterval(function(){
@@ -29,5 +30,22 @@ if (getPage() === "options"){
   $(window).on('konami', function() {
     console.log("Tributes disabled!");
     chrome.storage.local.set({rekt: 'dabes'});
+  });
+
+  chrome.storage.local.get('options', function(cb){
+    var options = cb.options;
+    if (!options){
+      return;
+    }
+    for (var i in $loopSettings) {
+      if ($loopSettings[i].value == options.loop){
+        $loopSettings[i].checked = true;
+      }
+    }
+  });
+
+  $loopSettings.on('change', function(event){
+    settings.loop = event.target.value;
+    chrome.storage.local.set({options: {loop: event.target.value}});
   });
 }

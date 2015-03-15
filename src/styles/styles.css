@@ -44,3 +44,23 @@ h1 {
   line-height: 1em;
   margin-top: 1em;
 }
+.settings {
+  border: 1px solid #ccc;
+  padding: 20px;
+  font-size: 20px;
+  margin: 30px auto;
+}
+.settings-title {
+  margin: -20px -20px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+input[type=radio]{
+  position: relative;
+  top: -3px;
+}
+.form-group {
+  margin: 6px auto;
+}
