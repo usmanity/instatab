@@ -76,15 +76,15 @@ var _log = function(data){
 };
 
 // to options page for new users
-var first_run = false;
-if (!localStorage['ran_before']) {
-  first_run = true;
-  localStorage['ran_before'] = '1';
-}
+// var first_run = false;
+// if (!localStorage['ran_before']) {
+//   first_run = true;
+//   localStorage['ran_before'] = '1';
+// }
+//
+// if (first_run) {
+//   chrome.tabs.create({url: "src/options/index.html"});
+// }
 
-if (first_run) {
-  chrome.tabs.create({url: "src/options/index.html"});
-}
-
-checkForTribute();
+// checkForTribute();
 console.info("Thanks for using InstaTab, you're running on version " + app.version);
