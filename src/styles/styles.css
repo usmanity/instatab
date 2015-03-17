@@ -64,3 +64,8 @@ input[type=radio]{
 .form-group {
   margin: 6px auto;
 }
+.notices {
+  position: fixed;
+  bottom: 10px;
+  font-size: 12px;
+}
