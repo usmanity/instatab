@@ -15,8 +15,11 @@ function setAuth(code){
   authCode = code;
 }
 function getAuth(){
-  chrome.storage.local.get('auth', function(code){
-    authCode = code.auth;
+  return new Promise(function(fulfill, reject){
+    chrome.storage.local.get('auth', function(code){
+      authCode = code.auth;
+      fulfill();
+    });
   });
 }
 function getPage(){
@@ -36,37 +39,37 @@ function processTime(ms){
     return diffInMinutes + 'm';
   }
 }
-function getTribute(){
-  var level;
-  chrome.storage.local.get('hinis', function(current){
-    level = current;
-    if (level){
-      if (level.hinis > 10){
-        loro = true;
-        chrome.storage.local.set({
-          'hinis': 0
-        });
-      } else {
-        chrome.storage.local.set({
-          'hinis': level.hinis + 1
-        });
-      }
-    } else {
-      chrome.storage.local.set({
-        'hinis': 1
-      });
-    }
-  });
-}
-function checkForTribute(){
-  chrome.storage.local.get('rekt', function(air){
-    if (air.rekt){
-      return;
-    } else {
-      getTribute();
-    }
-  });
-}
+// function getTribute(){
+//   var level;
+//   chrome.storage.local.get('hinis', function(current){
+//     level = current;
+//     if (level){
+//       if (level.hinis > 10){
+//         loro = true;
+//         chrome.storage.local.set({
+//           'hinis': 0
+//         });
+//       } else {
+//         chrome.storage.local.set({
+//           'hinis': level.hinis + 1
+//         });
+//       }
+//     } else {
+//       chrome.storage.local.set({
+//         'hinis': 1
+//       });
+//     }
+//   });
+// }
+// function checkForTribute(){
+//   chrome.storage.local.get('rekt', function(air){
+//     if (air.rekt){
+//       return;
+//     } else {
+//       getTribute();
+//     }
+//   });
+// }
 
 // a log in the dom
 var _log = function(data){

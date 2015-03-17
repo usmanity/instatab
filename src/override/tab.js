@@ -13,7 +13,7 @@ var getInstagramFeed = function(){
 };
 
 var displayFeed = function(feed){
-  var landom = Math.floor(Math.random() * 8 + 1);
+  // var landom = Math.floor(Math.random() * 8 + 1);
   for (var i = 0; i < 8; i++){
       var post = feed.data[i];
       var timeSince = processTime(post.created_time);
@@ -42,9 +42,9 @@ var displayFeed = function(feed){
         var $play = $("<div class='play'></div>");
         $el.append($play);
       }
-      if (landom === i){
+      // if (landom === i){
         // $el.append($pin);
-      }
+      // }
       $el.click(play);
       if (i < 4){
         $(".first-row").append($el);
@@ -56,6 +56,7 @@ var displayFeed = function(feed){
     var loopSetting = settings.loop === 'true';
     $("video").attr('loop', loopSetting);
   });
+
   {{timer_end}}
 };
 
@@ -85,17 +86,12 @@ function getSettings(){
 
 if (getPage() === 'tab'){
   $("#authLink").attr("href", AUTH_URL)
-  getAuthInterval = window.setInterval(function(){
-    getAuth();
+  getAuth().then(function(){
     if (authCode !== undefined && authCode !== ""){
       getInstagramFeed();
-      $('.auth-button').addClass('hidden')
-      window.clearInterval(getAuthInterval);
+      $('.auth-button').addClass('hidden');
     } else {
       $('.auth-button').removeClass('hidden')
     }
-    if (intervalCounter > 9){
-      window.clearInterval(getAuthInterval);
-    }
-  }, 25);
+  });
 }
