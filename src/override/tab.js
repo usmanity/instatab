@@ -43,7 +43,7 @@ var displayFeed = function(feed){
         $el.append($play);
       }
       if (landom === i){
-        $el.append($pin);
+        // $el.append($pin);
       }
       $el.click(play);
       if (i < 4){
