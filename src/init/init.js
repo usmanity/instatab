@@ -71,13 +71,6 @@ function processTime(ms){
 //   });
 // }
 
-// a log in the dom
-var _log = function(data){
-  if (typeof(data) !== "object"){
-    $(".log").text(data);
-  };
-};
-
 // to options page for new users
 // var first_run = false;
 // if (!localStorage['ran_before']) {
