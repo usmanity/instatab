@@ -116,25 +116,30 @@ function handleDoubleClick(event){
 
 function likeThis(post){
     $(post).siblings('.heart').removeClass('hidden').fadeIn(400);
-    var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes";
-    $.ajax(instagramUrl, {
+    var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes?access_token=" + authCode;
+    $.post(instagramUrl, {
         url: instagramUrl,
         data: {
             access_token: authCode
         },
-        success: function(){
+        success: function(response){
             var likeTimer = window.setTimeout(function(){
                 $(post).siblings('.heart').fadeOut(400);
                 window.clearTimeout(likeTimer);
             }, 700);
-
+        },
+        error: function(error){
+            var likeTimer = window.setTimeout(function(){
+                $(post).siblings('.heart').fadeOut(400);
+                window.clearTimeout(likeTimer);
+            }, 700);
         },
         dataType: 'jsonp'
     });
 }
 
 if (getPage() === 'tab'){
-  $("#authLink").attr("href", AUTH_URL)
+  $("#authLink").attr("href", AUTH_URL);
   getAuth().then(function(){
     if (authCode !== undefined && authCode !== ""){
       getInstagramFeed();
