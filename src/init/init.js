@@ -7,6 +7,9 @@ var AUTH_URL = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID +
 var app = chrome.runtime.getManifest();
 var authButtonCounter = 0;
 var authCode;
+var delay = 500;
+var clicks = 0;
+var clickTimer = null;
 var loro;
 
 // save and retrieve from chrome local storage

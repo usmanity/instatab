@@ -22,7 +22,7 @@ var displayFeed = function(feed){
       var $el = $("<div class='container'></div>");
       var type = feed.data[i].type;
       if (type === "image"){
-        var $container = $("<a class='photo' href='"+ post.link +"'><img src='" + imageUrl + "'></a>");
+        var $container = $("<span class='photo' data-href='"+ post.link +"' data-id='" + post.id + "'><img src='" + imageUrl + "'></span>");
       } else {
         var videoUrl = post.videos.standard_resolution.url;
         var $container = $("<video loop preload='true' src='" + videoUrl + "'></video>");
@@ -32,11 +32,13 @@ var displayFeed = function(feed){
         "background-image": "url(" + username.profile_picture + ")"
       });
       var $time = $("<span class='time'>"+ timeSince +"</span>");
+      var $heart = $("<span class='heart' style='display:none;'></span>");
       $username.prepend($avatar).append($time);
+      $container.append($heart);
       // if (post.user_has_liked){
       //   $heart.addClass('liked');
       // }
-      var $pin = $("<div class='pin'></div>")
+      var $pin = $("<div class='pin'></div>");
       $el.append($username).append($container);
       if (type === "video"){
         var $play = $("<div class='play'></div>");
@@ -45,7 +47,7 @@ var displayFeed = function(feed){
       // if (landom === i){
         // $el.append($pin);
       // }
-      $el.click(play);
+      //$el.on('click', event, handleSingleClick).on('dblClick', event, handleDoubleClick);
       if (i < 4){
         $(".first-row").append($el);
       } else {
@@ -56,14 +58,14 @@ var displayFeed = function(feed){
     var loopSetting = settings.loop === 'true';
     $("video").attr('loop', loopSetting);
   });
-
+  $(".container").on("click", event, handleSingleClick).on("dblclick", event, handleDoubleClick);
   {{timer_end}}
 };
 
-function play(){
-  $(this).find('video').trigger('play');
-  $(this).find('.play').addClass('hidden');
-  $(this).unbind('click').click(pause);
+function play(event){
+  $(event.target).parent().find('video').trigger('play');
+  $(event.target).parent().find('.play').addClass('hidden');
+  $(event.target).parent().unbind('click').click(pause);
 }
 
 function pause(){
@@ -82,6 +84,53 @@ function getSettings(){
       fulfill(options);
     });
   })
+}
+
+function handleSingleClick(event){
+    clicks++;
+    if (clicks === 1){
+        if (event.target.tagName === "IMG"){
+            clickTimer = setTimeout(function(){
+                window.location = $(event.target).parent().data('href');
+                clicks = 0;
+            }, delay);
+        } else {
+            clickTimer = setTimeout(function(){
+                play(event);
+                clicks = 0;
+            }, delay);
+        }
+    } else {
+        clearTimeout(clickTimer);
+        likeThis(event.target);
+        clicks = 0;
+    }
+}
+
+function handleDoubleClick(event){
+    clicks = 0;
+    clearTimeout(clickTimer);
+    likeThis(event.target);
+    event.preventDefault();
+}
+
+function likeThis(post){
+    $(post).siblings('.heart').removeClass('hidden').fadeIn(400);
+    var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes";
+    $.ajax(instagramUrl, {
+        url: instagramUrl,
+        data: {
+            access_token: authCode
+        },
+        success: function(){
+            var likeTimer = window.setTimeout(function(){
+                $(post).siblings('.heart').fadeOut(400);
+                window.clearTimeout(likeTimer);
+            }, 700);
+
+        },
+        dataType: 'jsonp'
+    });
 }
 
 if (getPage() === 'tab'){

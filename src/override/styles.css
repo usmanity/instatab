@@ -31,6 +31,7 @@ body, html {
 .photo, .video {
   position: relative;
   float: left;
+  cursor: pointer;
 }
 .play {
   width: 100%;
@@ -105,9 +106,23 @@ body, html {
   border-radius: 15px;
   float: left;
   margin-right: 8px;
-  /*border: 1px solid #D8D8D8;*/
 }
 .time {
   float: right;
   color: rgba(165, 167, 170, 0.7);
+}
+.heart {
+    width: 100px;
+    background-image: url('/images/heart.png');
+    display: block;
+    height: 100px;
+    position: absolute;
+    background-size: 60px;
+    background-repeat: no-repeat;
+    margin: auto;
+    background-position: center;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
 }
