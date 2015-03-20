@@ -3,10 +3,14 @@ var getInstagramFeed = function(){
   $.ajax({
     url: instagramUrl,
     data: {
-      access_token: authCode
+      access_token: authCode,
+      count: COUNT
     },
     success: function(response){
       displayFeed(response);
+    },
+    error: function(){
+        $(".disconnected").removeClass('hidden');
     },
     dataType: 'jsonp'
   });
@@ -25,7 +29,7 @@ var displayFeed = function(feed){
         var $container = $("<span class='photo' data-href='"+ post.link +"' data-id='" + post.id + "'><img src='" + imageUrl + "'></span>");
       } else {
         var videoUrl = post.videos.standard_resolution.url;
-        var $container = $("<video loop preload='true' src='" + videoUrl + "'></video>");
+        var $container = $("<video loop src='" + videoUrl + "'></video>");
       }
       var $username = $("<a class='username'>" + username.username + "</a>").attr("href", "https://instagram.com/" + username.username);
       var $avatar = $("<span class='avatar'></span>").css({
@@ -33,8 +37,9 @@ var displayFeed = function(feed){
       });
       var $time = $("<span class='time'>"+ timeSince +"</span>");
       var $heart = $("<span class='heart' style='display:none;'></span>");
+      var $caption = $("<span class='caption'>"+ post.caption.text +"</span>")
       $username.prepend($avatar).append($time);
-      $container.append($heart);
+      $container.append($heart).append($caption);
       // if (post.user_has_liked){
       //   $heart.addClass('liked');
       // }
@@ -102,7 +107,9 @@ function handleSingleClick(event){
         }
     } else {
         clearTimeout(clickTimer);
-        likeThis(event.target);
+        if (!LIKING){
+            likeThis(event.target);
+        }
         clicks = 0;
     }
 }
@@ -110,11 +117,14 @@ function handleSingleClick(event){
 function handleDoubleClick(event){
     clicks = 0;
     clearTimeout(clickTimer);
-    likeThis(event.target);
+    if (!LIKING){
+        likeThis(event.target);
+    }
     event.preventDefault();
 }
 
 function likeThis(post){
+    LIKING = true;
     $(post).siblings('.heart').removeClass('hidden').fadeIn(400);
     var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes?access_token=" + authCode;
     $.post(instagramUrl, {
@@ -122,19 +132,24 @@ function likeThis(post){
         data: {
             access_token: authCode
         },
-        success: function(response){
+        success: function(data){
             var likeTimer = window.setTimeout(function(){
                 $(post).siblings('.heart').fadeOut(400);
                 window.clearTimeout(likeTimer);
+                LIKING = false;
+                amplitude.logEvent("liked photo", eventProperties);
             }, 700);
         },
         error: function(error){
             var likeTimer = window.setTimeout(function(){
                 $(post).siblings('.heart').fadeOut(400);
                 window.clearTimeout(likeTimer);
+                LIKING = false;
+                amplitude.logEvent("error liking photo", eventProperties);
             }, 700);
+
         },
-        dataType: 'jsonp'
+        dataType: 'json'
     });
 }
 

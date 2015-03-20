@@ -126,3 +126,27 @@ body, html {
     right: 0;
     top: 0;
 }
+.caption {
+    display: none;
+}
+.photo:hover  .caption {
+    background-color: rgba(0, 0, 0, 0.26);
+    color: white;
+    width: 85%;
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 3px;
+    padding: 5%;
+    font-family: helvetica, sans-serif;
+    letter-spacing: 0.5px;
+    line-height: 15px;
+}
+.disconnected {
+    padding-top: 25%;
+    text-align: center;
+}
+.disconnected img {
+    width: 80%;
+    margin: auto;
+}

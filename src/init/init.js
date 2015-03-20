@@ -2,7 +2,7 @@
 // constants from config
 var CLIENT_ID = "{{client_id}}";
 var REDIRECT_URI = "chrome-extension://"+ window.location.origin.split("//")[1] +"/src/auth/finished.html";
-var AUTH_URL = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URI + "&response_type=token&scope=likes+relationships";
+var AUTH_URL = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URI + "&response_type=token&scope=likes+relationships+comments";
 
 var app = chrome.runtime.getManifest();
 var authButtonCounter = 0;
@@ -11,6 +11,8 @@ var delay = 500;
 var clicks = 0;
 var clickTimer = null;
 var loro;
+var COUNT = 9;
+var LIKING;
 
 // save and retrieve from chrome local storage
 function setAuth(code){
