@@ -3,6 +3,9 @@ body, html {
   margin: 0;
   margin-left: 5px;
   font-family: 'Helvetica Neue', Helvetica, 'San Francisco', Roboto, sans-serif;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
 }
 .hidden {
   display: none !important;
@@ -51,6 +54,7 @@ body, html {
   float: left;
   margin: 10px auto;
   position: relative;
+  user-select: none;
 }
 .container img, .container video {
   width: 95%;
@@ -141,6 +145,9 @@ body, html {
     font-family: helvetica, sans-serif;
     letter-spacing: 0.5px;
     line-height: 15px;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
 }
 .disconnected {
     padding-top: 25%;
@@ -149,4 +156,14 @@ body, html {
 .disconnected img {
     width: 80%;
     margin: auto;
+}
+.liked {
+  position: absolute;
+  background-image: url('/images/love.svg');
+  width: 20px;
+  height: 20px;
+  left: 77%;
+  top: -34px;
+  background-size: 20px;
+  background-repeat: no-repeat;
 }

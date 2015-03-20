@@ -36,13 +36,14 @@ var displayFeed = function(feed){
         "background-image": "url(" + username.profile_picture + ")"
       });
       var $time = $("<span class='time'>"+ timeSince +"</span>");
-      var $heart = $("<span class='heart' style='display:none;'></span>");
+      var $heart = $("<span class='heart' data-id='' style='display:none;'></span>");
       var $caption = $("<span class='caption'>"+ post.caption.text +"</span>")
+      var $liked = $("<span class='liked hidden'></span>")
       $username.prepend($avatar).append($time);
-      $container.append($heart).append($caption);
-      // if (post.user_has_liked){
-      //   $heart.addClass('liked');
-      // }
+      $container.append($heart).append($caption).append($liked);
+      if (post.user_has_liked){
+        $liked.removeClass('hidden');
+      }
       var $pin = $("<div class='pin'></div>");
       $el.append($username).append($container);
       if (type === "video"){
@@ -134,7 +135,7 @@ function likeThis(post){
         },
         success: function(data){
             var likeTimer = window.setTimeout(function(){
-                $(post).siblings('.heart').fadeOut(400);
+                $(post).siblings('.heart').fadeOut(400).siblings('.liked').removeClass('hidden');
                 window.clearTimeout(likeTimer);
                 LIKING = false;
                 amplitude.logEvent("liked photo", eventProperties);
