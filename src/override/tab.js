@@ -37,7 +37,9 @@ var displayFeed = function(feed){
       });
       var $time = $("<span class='time'>"+ timeSince +"</span>");
       var $heart = $("<span class='heart' data-id='' style='display:none;'></span>");
-      var $caption = $("<span class='caption'>"+ post.caption.text +"</span>")
+      if (post.caption){
+        var $caption = $("<span class='caption'>"+ post.caption.text +"</span>")
+      }
       var $liked = $("<span class='liked hidden'></span>")
       $username.prepend($avatar).append($time);
       $container.append($heart).append($caption).append($liked);

@@ -155,6 +155,7 @@ body, html {
 }
 .disconnected img {
     width: 80%;
+    max-width: 600px;
     margin: auto;
 }
 .liked {
