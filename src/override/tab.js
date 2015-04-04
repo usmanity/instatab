@@ -97,15 +97,15 @@ function getSettings(){
 function handleSingleClick(event){
     clicks++;
     if (clicks === 1){
-        if (event.target.tagName === "IMG"){
+        if (event.target.tagName === "IMG" || event.target.className.indexOf('caption') === 0){
             clickTimer = setTimeout(function(){
-                window.location = $(event.target).parent().data('href');
                 clicks = 0;
+                window.location = $(event.target).parent().data('href');
             }, delay);
         } else {
             clickTimer = setTimeout(function(){
-                play(event);
                 clicks = 0;
+                play(event);
             }, delay);
         }
     } else {
