@@ -128,7 +128,8 @@ function handleDoubleClick(event){
 
 function likeThis(post){
     LIKING = true;
-    $(post).siblings('.heart').removeClass('hidden').fadeIn(400);
+    $(post).siblings('.heart').removeClass('hidden').fadeIn(300);
+
     var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes?access_token=" + authCode;
     $.post(instagramUrl, {
         url: instagramUrl,
@@ -137,7 +138,7 @@ function likeThis(post){
         },
         success: function(data){
             var likeTimer = window.setTimeout(function(){
-                $(post).siblings('.heart').fadeOut(400).siblings('.liked').removeClass('hidden');
+                $(post).siblings('.heart').fadeOut(300).siblings('.liked').removeClass('hidden');
                 window.clearTimeout(likeTimer);
                 LIKING = false;
                 amplitude.logEvent("liked photo", eventProperties);
@@ -145,10 +146,9 @@ function likeThis(post){
         },
         error: function(error){
             var likeTimer = window.setTimeout(function(){
-                $(post).siblings('.heart').fadeOut(400);
+                $(post).siblings('.heart').fadeOut(300);
                 window.clearTimeout(likeTimer);
                 LIKING = false;
-                amplitude.logEvent("error liking photo", eventProperties);
             }, 700);
 
         },
