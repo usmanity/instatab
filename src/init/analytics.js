@@ -7,6 +7,20 @@
 
   amplitude.init("{{amplitude_key}}");
 
+  var setUser = function(){
+    var instagramUrl = "https://api.instagram.com/v1/users/self/";
+    $.ajax({
+      url: instagramUrl,
+      data: {
+        access_token: authCode
+      },
+      success: function(response){
+        amplitude.setUserId(response.data.username);
+      },
+      dataType: 'jsonp'
+    });
+  };
+
   var eventProperties = {
     appVersion: app.version
   };

@@ -10,14 +10,15 @@ var getInstagramFeed = function(){
       displayFeed(response);
     },
     error: function(){
-        $(".disconnected").removeClass('hidden');
+        window.setTimeout(function(){
+          $(".disconnected").removeClass('hidden');
+        }, 500);
     },
     dataType: 'jsonp'
   });
 };
 
 var displayFeed = function(feed){
-  // var landom = Math.floor(Math.random() * 8 + 1);
   for (var i = 0; i < 8; i++){
       var post = feed.data[i];
       var timeSince = processTime(post.created_time);
@@ -162,6 +163,7 @@ if (getPage() === 'tab'){
     if (authCode !== undefined && authCode !== ""){
       getInstagramFeed();
       $('.auth-button').addClass('hidden');
+      setUser();
     } else {
       $('.auth-button').removeClass('hidden')
     }
