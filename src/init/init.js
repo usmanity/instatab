@@ -11,7 +11,7 @@ var delay = 500;
 var clicks = 0;
 var clickTimer = null;
 var loro;
-var COUNT = 9;
+var COUNT = 15;
 var LIKING;
 
 // save and retrieve from chrome local storage
