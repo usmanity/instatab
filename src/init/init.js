@@ -48,15 +48,15 @@ function processTime(ms){
   }
 }
 
-function getTribute(){
+function getStats(){
   var level;
   chrome.storage.local.get('hinis', function(current){
     level = current;
     console.log(level);
     if (level){
-      if (level.hinis > 100){
+      if (level.hinis > 10){
         loro = true;
-        amplitude.logEvent('hundred tabs opened');
+        amplitude.logEvent('ten tabs opened');
         chrome.storage.local.set({
           'hinis': 0
         });
@@ -71,6 +71,20 @@ function getTribute(){
       });
     }
   });
+
+  chrome.storage.local.get('total', function(current){
+    level = current;
+    console.log(level);
+    if (level){
+      chrome.storage.local.set({
+        'total': level.total + 1
+      });
+    } else {
+      chrome.storage.local.set({
+        'total': 1
+      });
+    }
+  });
 }
 
 function checkForTribute(){
@@ -78,7 +92,7 @@ function checkForTribute(){
     if (air.rekt){
       return;
     } else {
-      getTribute();
+      getStats();
     }
   });
 }
