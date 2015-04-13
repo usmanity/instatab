@@ -49,11 +49,9 @@ function processTime(ms){
 }
 
 function getStats(){
-  var level;
-  chrome.storage.local.get('hinis', function(current){
-    level = current;
+  chrome.storage.local.get('hinis', function(level){
     console.log(level);
-    if (level){
+    if (level.hinis){
       if (level.hinis > 10){
         loro = true;
         amplitude.logEvent('ten tabs opened');
@@ -72,10 +70,9 @@ function getStats(){
     }
   });
 
-  chrome.storage.local.get('total', function(current){
-    level = current;
+  chrome.storage.local.get('total', function(level){
     console.log(level);
-    if (level){
+    if (level.total){
       chrome.storage.local.set({
         'total': level.total + 1
       });
