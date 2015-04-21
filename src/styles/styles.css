@@ -1,13 +1,14 @@
 body {
-  font-size: 36px;
-  width: 90%;
+  font-size: 10px;
+  width: 100%;
   margin: auto;
+  padding: 20px 50px;
 }
 h1 {
-  font-size: 1em;
+  font-size: 2em;
 }
 .auth {
-  font-size: 0.7em;
+  font-size: 2em;
   line-height: 1.4em;
 }
 #authLink {
@@ -40,7 +41,7 @@ h1 {
   top: 0;
 }
 .thanks {
-  font-size: 0.5em;
+  font-size: 2em;
   line-height: 1.4em;
   margin-top: 1em;
 }
@@ -70,5 +71,9 @@ input[type=radio]{
 .notices {
   position: fixed;
   bottom: 10px;
-  font-size: 12px;
+  font-size: 1.4em;
+}
+.stats {
+  font-size: 2em;
+  margin-top: 20px;
 }

@@ -48,9 +48,8 @@ function processTime(ms){
   }
 }
 
-function getStats(){
+function updateStats(){
   chrome.storage.local.get('hinis', function(level){
-    console.log(level);
     if (level.hinis){
       if (level.hinis > 10){
         loro = true;
@@ -71,7 +70,6 @@ function getStats(){
   });
 
   chrome.storage.local.get('total', function(level){
-    console.log(level);
     if (level.total){
       chrome.storage.local.set({
         'total': level.total + 1
@@ -84,15 +82,31 @@ function getStats(){
   });
 }
 
-function checkForTribute(){
-  chrome.storage.local.get('rekt', function(air){
-    if (air.rekt){
-      return;
+function getTotalTabsOpened(){
+  var deferred = D();
+  chrome.storage.local.get('total', function(level){
+    if (level.total) {
+      deferred.resolve(level.total);
     } else {
-      getStats();
+      deferred.reject({});
     }
   });
+  return deferred.promise;
 }
 
-checkForTribute();
+function checkForTribute(){
+  var deferred = D();
+  chrome.storage.local.get('rekt', function(air){
+    if (air.rekt) {
+      deferred.resolve(air.rekt);
+    } else {
+      deferred.reject();
+    }
+  });
+  return deferred.promise;
+}
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 console.info("Thanks for using InstaTab, you're running on version " + app.version);

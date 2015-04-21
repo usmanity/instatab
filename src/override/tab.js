@@ -157,15 +157,22 @@ function likeThis(post){
     });
 }
 
-if (getPage() === 'tab'){
-  $("#authLink").attr("href", AUTH_URL);
-  getAuth().then(function(){
-    if (authCode !== undefined && authCode !== ""){
-      getInstagramFeed();
-      $('.auth-button').addClass('hidden');
-      setUser();
-    } else {
-      $('.auth-button').removeClass('hidden')
-    }
-  });
+if (getPage() === 'tab') {
+    $("#authLink").attr("href", AUTH_URL);
+    getAuth().then(function () {
+        if (authCode !== undefined && authCode !== "") {
+            getInstagramFeed();
+            $('.auth-button').addClass('hidden');
+            setUser();
+        } else {
+            $('.auth-button').removeClass('hidden')
+        }
+    });
+    checkForTribute().then(function (enabled) {
+        console.log('disabled counting');
+    }, function(disabled){
+        if (disabled) {
+            updateStats();
+        }
+    });
 }

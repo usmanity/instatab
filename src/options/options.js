@@ -48,4 +48,13 @@ if (getPage() === "options"){
     settings.loop = event.target.value;
     chrome.storage.local.set({options: {loop: event.target.value}});
   });
+
+    checkForTribute().then(function(allow){
+        if (allow){
+            $(".stats").removeClass('hidden');
+            getTotalTabsOpened().then(function(tabs){
+                $('#totalNumber').text(numberWithCommas(tabs));
+            });
+        }
+    });
 }
