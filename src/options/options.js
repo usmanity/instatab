@@ -30,6 +30,7 @@ if (getPage() === "options"){
   $(window).on('konami', function() {
     console.log("Tributes disabled!");
     chrome.storage.local.set({rekt: 'dabes'});
+    toast('<strong>Konami enabled!</strong><br> You will now see beta features throughout InstaTab!', 2000);
   });
 
   chrome.storage.local.get('options', function(cb){
@@ -47,6 +48,7 @@ if (getPage() === "options"){
   $loopSettings.on('change', function(event){
     settings.loop = event.target.value;
     chrome.storage.local.set({options: {loop: event.target.value}});
+    toast("Settings updated to " + event.target.dataset.label, 2000);
   });
 
     checkForTribute().then(function(allow){

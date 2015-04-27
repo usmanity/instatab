@@ -106,6 +106,13 @@ function checkForTribute(){
   return deferred.promise;
 }
 
+function toast(message, delay){
+  $('.alert-container').removeClass('hidden').html(message);
+  window.setTimeout(function(){
+    $('.alert-container').addClass('hidden');
+  }, delay);
+}
+
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

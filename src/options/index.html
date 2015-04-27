@@ -26,10 +26,10 @@
 		<form class="settings-form" action="index.html" method="post">
 			<div id="loopSettings">
 				<div class="form-group">
-					<input type="radio" name="loop" value=true> <span class="input-label">Loop videos</span>
+					<input type="radio" name="loop" value=true data-label="loop videos"> <span class="input-label">Loop videos</span>
 				</div>
 				<div class="form-group">
-					<input type="radio" name="loop" value=false> <span class="input-label">Play once</span>
+					<input type="radio" name="loop" value=false data-label="play videos only once"> <span class="input-label">Play once</span>
 				</div>
 			</div>
 		</form>
@@ -46,6 +46,9 @@
 		You've opened <span id="totalNumber"></span> tabs since installing InstaTab.
 	</div>
 
+	<a class="coinbase-button" data-code="e07da9d5ad6710b59451adb690ce9985" data-button-style="donation_small" href="https://www.coinbase.com/checkouts/e07da9d5ad6710b59451adb690ce9985">Support InstaTab Development</a>
+
+	<div class="alert-container hidden"></div>
 	<div class="notices">
 		InstaTab is not related to or affiliated with Instagram or Facebook.<br>
 		Instagram users own their content, this extension does not claim any ownership of any content.<br>
