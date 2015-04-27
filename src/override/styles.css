@@ -2,7 +2,7 @@ body, html {
   padding: 0;
   margin: 0;
   margin-left: 5px;
-  font-family: 'Helvetica Neue', Helvetica, 'San Francisco', Roboto, sans-serif;
+  font-family: 'San Francisco', 'Helvetica Neue', Helvetica,  Roboto, sans-serif;
   user-select: none;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -10,7 +10,7 @@ body, html {
 .hidden {
   display: none !important;
 }
-.auth-button a{
+.auth-button a {
   margin: 48vh auto;
   width: 220px;
   text-align: center;
@@ -29,6 +29,9 @@ body, html {
   background-repeat: no-repeat;
 }
 .auth-button a:hover {
+.single-row {
+    width: 50%;
+}
   background-color: #58d68d;
 }
 .photo, .video {
@@ -170,4 +173,13 @@ body, html {
   top: -34px;
   background-size: 20px;
   background-repeat: no-repeat;
+}
+
+.single-row {
+    width: 50%;
+    float: none;
+    margin: auto;
+}
+.single-row .container {
+    width: 100%;
 }
