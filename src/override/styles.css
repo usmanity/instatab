@@ -29,7 +29,7 @@ body, html {
   background-repeat: no-repeat;
 }
 .auth-button a:hover {
-.single-row {
+.single {
     width: 50%;
 }
   background-color: #58d68d;
@@ -175,11 +175,11 @@ body, html {
   background-repeat: no-repeat;
 }
 
-.single-row {
+.single {
     width: 50%;
     float: none;
     margin: auto;
 }
-.single-row .container {
+.single .container {
     width: 100%;
 }

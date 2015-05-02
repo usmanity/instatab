@@ -63,7 +63,7 @@ var displayFeed = function(feed){
         $(".second-row").append($el);
       }
   }
-  getSettings().then(function(settings){
+  getSettings('options').then(function(settings){
     var loopSetting = settings.loop === 'true';
     $("video").attr('loop', loopSetting);
   });
@@ -83,10 +83,10 @@ function pause(){
   $(this).unbind('click').click(play);
 }
 
-function getSettings(){
+function getSettings(option){
   return new Promise(function (fulfill, reject){
-    chrome.storage.local.get('options', function(cb){
-      var options = cb.options;
+    chrome.storage.local.get(option, function(cb){
+      var options = cb[option];
       if (!options) {
         reject();
       }
@@ -142,7 +142,7 @@ function likeThis(post){
                 $(post).siblings('.heart').fadeOut(300).siblings('.liked').removeClass('hidden');
                 window.clearTimeout(likeTimer);
                 LIKING = false;
-                amplitude.logEvent("liked photo", eventProperties);
+                //amplitude.logEvent("liked photo", eventProperties);
             }, 700);
         },
         error: function(error){
@@ -159,6 +159,12 @@ function likeThis(post){
 
 if (getPage() === 'tab') {
     $("#authLink").attr("href", AUTH_URL);
+    getSettings('layoutSettings').then(function(layout){
+        if (layout == 'single'){
+            $(".feed").addClass('single')
+        }
+
+    });
     getAuth().then(function () {
         if (authCode !== undefined && authCode !== "") {
             getInstagramFeed();

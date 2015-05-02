@@ -3,6 +3,7 @@ if (getPage() === "options"){
   var intervalCounter = 0;
   var settings = {};
   var $loopSettings = $("input[name='loop']");
+  var $gridSettings = $("input[name='grid']");
   getAuth();
 
   pageInterval = window.setInterval(function(){
@@ -44,21 +45,46 @@ if (getPage() === "options"){
         $loopSettings[i].checked = true;
       }
     }
+
+  });
+  chrome.storage.local.get('layoutSettings', function(cb){
+    var layoutSettings = cb.layoutSettings;
+    if (!layoutSettings){
+      return;
+    }
+    for (var i in $gridSettings) {
+      if ($gridSettings[i].value == layoutSettings){
+        $gridSettings[i].checked = true;
+      }
+    }
   });
 
   $loopSettings.on('change', function(event){
     settings.loop = event.target.value;
     chrome.storage.local.set({options: {loop: event.target.value}});
-    amplitude.logEvent("changed settings", event.target.dataset.label);
+
+    // logging
+    var eventProperties = {loopType: event.target.dataset.label};
+    amplitude.logEvent("changed settings", eventProperties);
     toast("Settings updated to " + event.target.dataset.label, 2000);
   });
 
-    checkForTribute().then(function(allow){
-        if (allow){
-            $(".stats").removeClass('hidden');
-            getTotalTabsOpened().then(function(tabs){
-                $('#totalNumber').text(numberWithCommas(tabs));
-            });
-        }
-    });
+  $gridSettings.on('change', function(event){
+    settings.grid = event.target.value;
+    chrome.storage.local.set({layoutSettings: event.target.value});
+
+    // logging
+    var eventProperties = {gridSetting: event.target.dataset.label};
+    amplitude.logEvent("changed settings", eventProperties);
+    toast("Settings updated to " + event.target.dataset.label, 2000);
+  });
+
+  checkForTribute().then(function(allow){
+      if (allow){
+          $(".stats").removeClass('hidden');
+          getTotalTabsOpened().then(function(tabs){
+              $('#totalNumber').text(numberWithCommas(tabs));
+          });
+      }
+  });
 }
