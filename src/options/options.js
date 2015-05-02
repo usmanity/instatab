@@ -1,3 +1,9 @@
+function showStats(){
+  $(".stats").removeClass('hidden');
+  getTotalTabsOpened().then(function(tabs){
+    $('#totalNumber').text(numberWithCommas(tabs));
+  });
+}
 if (getPage() === "options"){
   $("#authLink").attr('href', AUTH_URL);
   var intervalCounter = 0;
@@ -33,6 +39,7 @@ if (getPage() === "options"){
     chrome.storage.local.set({rekt: 'dabes'});
     amplitude.logEvent('konami enabled');
     toast('<strong>Konami enabled!</strong><br> You will now see beta features throughout InstaTab!', 2000);
+    showStats();
   });
 
   chrome.storage.local.get('options', function(cb){
@@ -81,10 +88,7 @@ if (getPage() === "options"){
 
   checkForTribute().then(function(allow){
       if (allow){
-          $(".stats").removeClass('hidden');
-          getTotalTabsOpened().then(function(tabs){
-              $('#totalNumber').text(numberWithCommas(tabs));
-          });
+          showStats();
       }
   });
 }
