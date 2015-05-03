@@ -25,3 +25,12 @@
     appVersion: app.version
   };
   amplitude.logEvent("opened new tab", eventProperties);
+
+  // fixes amplitude unsent errors
+  chrome.storage.local.get('hasReset', function(reset){
+    if (reset){
+      return;
+    } else {
+      localStorage.amplitude_unsent = []
+    }
+  });
