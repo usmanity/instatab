@@ -3,4 +3,4 @@ Tabby
 
 Also known as 'InstaTab', a new tab extension for chrome.
 
-Still a work in progress. 
+Download: [Chrome Web Store](https://chrome.google.com/webstore/detail/instatab/fedaamalccmbkgonnoihlnpcplcomlll?hl=en)
