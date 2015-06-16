@@ -67,7 +67,6 @@ body, html {
   width: 97vw;
   box-sizing: border-box;
   margin: auto;
-  overflow-y: hidden;
 }
 .first-row, .second-row {
   float: left;
