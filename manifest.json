@@ -1,6 +1,7 @@
 {
   "name": "InstaTab",
-  "version": "1.5.2",
+  "version": "1.7.0",
+  "short_name": "instatab",
   "manifest_version": 2,
   "description": "See your Instagram feed right in your new tab",
   "homepage_url": "http://usmanity.com",

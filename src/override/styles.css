@@ -2,7 +2,7 @@ body, html {
   padding: 0;
   margin: 0;
   margin-left: 5px;
-  font-family: 'San Francisco', 'Helvetica Neue', Helvetica,  Roboto, sans-serif;
+  font-family: 'San Francisco', 'Helvetica Neue', Helvetica, Roboto, sans-serif;
   user-select: none;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -55,7 +55,7 @@ body, html {
 .container {
   width: 25%;
   float: left;
-  margin: 10px auto;
+  margin: 4px auto;
   position: relative;
   user-select: none;
 }
@@ -63,10 +63,11 @@ body, html {
   width: 95%;
 }
 .feed {
-  height: 100%;
-  width: 100%;
+  height: 97vh;
+  width: 97vw;
   box-sizing: border-box;
-  float: left;
+  margin: auto;
+  overflow-y: hidden;
 }
 .first-row, .second-row {
   float: left;
@@ -149,8 +150,8 @@ body, html {
     padding: 5%;
     font-family: helvetica, sans-serif;
     letter-spacing: 0.5px;
-    font-size: 18px;
-    line-height: 22px;
+    font-size: 16px;
+    line-height: 20px;
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;

@@ -22,14 +22,14 @@ var displayFeed = function(feed){
   for (var i = 0; i < 8; i++){
       var post = feed.data[i];
       var timeSince = processTime(post.created_time);
-      var imageUrl = post.images.standard_resolution.url;
+      var imageUrl = post.images.low_resolution.url;
       var username = post.user;
       var $el = $("<div class='container'></div>");
       var type = feed.data[i].type;
       if (type === "image"){
         var $container = $("<span class='photo' data-href='"+ post.link +"' data-id='" + post.id + "'><img src='" + imageUrl + "'></span>");
       } else {
-        var videoUrl = post.videos.standard_resolution.url;
+        var videoUrl = post.videos.low_resolution.url;
         var $container = $("<video loop src='" + videoUrl + "'></video>");
       }
       var $username = $("<a class='username'>" + username.username + "</a>").attr("href", "https://instagram.com/" + username.username);
