@@ -36,7 +36,7 @@ var displayFeed = function(feed){
         if (type === "image"){
           var $container = $("<span class='photo' data-href='"+ post.link +"' data-id='" + post.id + "'><img src='" + imageUrl + "'></span>");
         } else {
-          var videoUrl = post.videos.low_resolution.url;
+          var videoUrl = post.videos[resolution].url;
           var $container = $("<video loop src='" + videoUrl + "'></video>");
         }
         var $username = $("<a class='username'>" + username.username + "</a>").attr("href", "https://instagram.com/" + username.username);
