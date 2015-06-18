@@ -19,54 +19,64 @@ var getInstagramFeed = function(){
 };
 
 var displayFeed = function(feed){
-  for (var i = 0; i < 8; i++){
-      var post = feed.data[i];
-      var timeSince = processTime(post.created_time);
-      var imageUrl = post.images.low_resolution.url;
-      var username = post.user;
-      var $el = $("<div class='container'></div>");
-      var type = feed.data[i].type;
-      if (type === "image"){
-        var $container = $("<span class='photo' data-href='"+ post.link +"' data-id='" + post.id + "'><img src='" + imageUrl + "'></span>");
-      } else {
-        var videoUrl = post.videos.low_resolution.url;
-        var $container = $("<video loop src='" + videoUrl + "'></video>");
-      }
-      var $username = $("<a class='username'>" + username.username + "</a>").attr("href", "https://instagram.com/" + username.username);
-      var $avatar = $("<span class='avatar'></span>").css({
-        "background-image": "url(" + username.profile_picture + ")"
-      });
-      var $time = $("<span class='time'>"+ timeSince +"</span>");
-      var $heart = $("<span class='heart' data-id='' style='display:none;'></span>");
-      if (post.caption){
-        var $caption = $("<span class='caption'>"+ post.caption.text +"</span>")
-      }
-      var $liked = $("<span class='liked hidden'></span>")
-      $username.prepend($avatar).append($time);
-      $container.append($heart).append($caption).append($liked);
-      if (post.user_has_liked){
-        $liked.removeClass('hidden');
-      }
-      var $pin = $("<div class='pin'></div>");
-      $el.append($username).append($container);
-      if (type === "video"){
-        var $play = $("<div class='play'></div>");
-        $el.append($play);
-      }
-      // if (landom === i){
-        // $el.append($pin);
-      // }
-      //$el.on('click', event, handleSingleClick).on('dblClick', event, handleDoubleClick);
-      if (i < 4){
-        $(".first-row").append($el);
-      } else {
-        $(".second-row").append($el);
-      }
-  }
+  getSettings('layoutSettings').then(function(settings){
+    if (settings == 'single'){
+      return 'standard_resolution'
+    } else {
+      return 'low_resolution'
+    }
+  }).then(function(resolution){
+    for (var i = 0; i < 8; i++){
+        var post = feed.data[i];
+        var timeSince = processTime(post.created_time);
+        var imageUrl = post.images[resolution].url;
+        var username = post.user;
+        var $el = $("<div class='container'></div>");
+        var type = feed.data[i].type;
+        if (type === "image"){
+          var $container = $("<span class='photo' data-href='"+ post.link +"' data-id='" + post.id + "'><img src='" + imageUrl + "'></span>");
+        } else {
+          var videoUrl = post.videos.low_resolution.url;
+          var $container = $("<video loop src='" + videoUrl + "'></video>");
+        }
+        var $username = $("<a class='username'>" + username.username + "</a>").attr("href", "https://instagram.com/" + username.username);
+        var $avatar = $("<span class='avatar'></span>").css({
+          "background-image": "url(" + username.profile_picture + ")"
+        });
+        var $time = $("<span class='time'>"+ timeSince +"</span>");
+        var $heart = $("<span class='heart' data-id='' style='display:none;'></span>");
+        if (post.caption){
+          var $caption = $("<span class='caption'>"+ post.caption.text +"</span>")
+        }
+        var $liked = $("<span class='liked hidden'></span>")
+        $username.prepend($avatar).append($time);
+        $container.append($heart).append($caption).append($liked);
+        if (post.user_has_liked){
+          $liked.removeClass('hidden');
+        }
+        var $pin = $("<div class='pin'></div>");
+        $el.append($username).append($container);
+        if (type === "video"){
+          var $play = $("<div class='play'></div>");
+          $el.append($play);
+        }
+        // if (landom === i){
+          // $el.append($pin);
+        // }
+        //$el.on('click', event, handleSingleClick).on('dblClick', event, handleDoubleClick);
+        if (i < 4){
+          $(".first-row").append($el);
+        } else {
+          $(".second-row").append($el);
+        }
+    }
+  })
+
   getSettings('options').then(function(settings){
     var loopSetting = settings.loop === 'true';
     $("video").attr('loop', loopSetting);
   });
+
   $(".container").on("click", event, handleSingleClick).on("dblclick", event, handleDoubleClick);
   {{timer_end}}
 };
