@@ -89,10 +89,10 @@ input[type=radio]{
   width: 300px;
   min-height: 10px;
   right: 5%;
-  border-radius: 35px;
+  border-radius: 5px;
   background-color: #0084FF;
   color: white;
   letter-spacing: 0.4px;
   font-size: 12px;
-  padding: 18px 40px 10px;
+  padding: 12px 20px 10px;
 }
