@@ -54,16 +54,12 @@ var displayFeed = function(feed){
         if (post.user_has_liked){
           $liked.removeClass('hidden');
         }
-        var $pin = $("<div class='pin'></div>");
         $el.append($username).append($container);
         if (type === "video"){
           var $play = $("<div class='play'></div>");
           $el.append($play);
         }
-        // if (landom === i){
-          // $el.append($pin);
-        // }
-        //$el.on('click', event, handleSingleClick).on('dblClick', event, handleDoubleClick);
+        $el.on('click', event, handleSingleClick).on('dblClick', event, handleDoubleClick);
         if (i < 4){
           $(".first-row").append($el);
         } else {
