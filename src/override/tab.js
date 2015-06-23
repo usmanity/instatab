@@ -136,7 +136,6 @@ function handleDoubleClick(event){
 function likeThis(post){
     LIKING = true;
     $(post).siblings('.heart').removeClass('hidden').fadeIn(300);
-
     var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes?access_token=" + authCode;
     $.post(instagramUrl, {
         url: instagramUrl,
@@ -157,7 +156,6 @@ function likeThis(post){
                 window.clearTimeout(likeTimer);
                 LIKING = false;
             }, 700);
-
         },
         dataType: 'json'
     });
@@ -169,7 +167,6 @@ if (getPage() === 'tab') {
         if (layout == 'single'){
             $(".feed").addClass('single')
         }
-
     });
     getAuth().then(function () {
         if (authCode !== undefined && authCode !== "") {
