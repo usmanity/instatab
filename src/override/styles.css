@@ -29,7 +29,7 @@ body, html {
   background-repeat: no-repeat;
 }
 .auth-button a:hover {
-.single {
+.instagram {
     width: 50%;
 }
   background-color: #58d68d;
@@ -175,11 +175,25 @@ body, html {
   background-repeat: no-repeat;
 }
 
-.single {
+.instagram {
     width: 50%;
     float: none;
     margin: auto;
 }
-.single .container {
+.instagram .container {
     width: 100%;
+}
+
+.single {
+  width: 100%;
+  float: none;
+  margin: auto;
+}
+
+.single .container {
+  width: 640px;
+  margin: auto;
+  float: none;
+  padding: 25px;
+  box-sizing: border-box;
 }

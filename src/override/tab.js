@@ -19,14 +19,19 @@ var getInstagramFeed = function(){
 };
 
 var displayFeed = function(feed){
+  var totalPhotos = 0;
   getSettings('layoutSettings').then(function(settings){
-    if (settings == 'single'){
-      return 'standard_resolution'
+    if (settings == 'grid'){
+      totalPhotos = 8;
+      return 'low_resolution';
+    } else if (settings == 'single'){
+      totalPhotos = 1;
+      return 'standard_resolution';
     } else {
-      return 'low_resolution'
+      return 'standard_resolution';
     }
   }).then(function(resolution){
-    for (var i = 0; i < 8; i++){
+    for (var i = 0; i < totalPhotos; i++){
         var post = feed.data[i];
         var timeSince = processTime(post.created_time);
         var imageUrl = post.images[resolution].url;
@@ -72,7 +77,6 @@ var displayFeed = function(feed){
     var loopSetting = settings.loop === 'true';
     $("video").attr('loop', loopSetting);
   });
-
   $(".container").on("click", event, handleSingleClick).on("dblclick", event, handleDoubleClick);
   {{timer_end}}
 };
@@ -147,7 +151,6 @@ function likeThis(post){
                 $(post).siblings('.heart').fadeOut(300).siblings('.liked').removeClass('hidden');
                 window.clearTimeout(likeTimer);
                 LIKING = false;
-                //amplitude.logEvent("liked photo", eventProperties);
             }, 700);
         },
         error: function(error){
@@ -164,9 +167,7 @@ function likeThis(post){
 if (getPage() === 'tab') {
     $("#authLink").attr("href", AUTH_URL);
     getSettings('layoutSettings').then(function(layout){
-        if (layout == 'single'){
-            $(".feed").addClass('single')
-        }
+        $(".feed").addClass(layout);
     });
     getAuth().then(function () {
         if (authCode !== undefined && authCode !== "") {
@@ -174,7 +175,7 @@ if (getPage() === 'tab') {
             $('.auth-button').addClass('hidden');
             setUser();
         } else {
-            $('.auth-button').removeClass('hidden')
+            $('.auth-button').removeClass('hidden');
         }
     });
     checkForTribute().then(function (enabled) {
