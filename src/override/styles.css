@@ -188,6 +188,8 @@ body, html {
   width: 100%;
   float: none;
   margin: auto;
+  margin-top: 3vh;
+  overflow-y: none;
 }
 
 .single .container {

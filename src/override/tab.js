@@ -178,11 +178,4 @@ if (getPage() === 'tab') {
             $('.auth-button').removeClass('hidden');
         }
     });
-    checkForTribute().then(function (enabled) {
-        console.log('disabled counting');
-    }, function(disabled){
-        if (disabled) {
-            updateStats();
-        }
-    });
 }
