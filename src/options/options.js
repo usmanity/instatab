@@ -81,7 +81,9 @@ if (getPage() === "options"){
     chrome.storage.local.set({layoutSettings: event.target.value});
 
     // logging
-    var eventProperties = {gridSetting: event.target.dataset.label};
+    var eventProperties = {
+      gridSetting: event.target.dataset.label
+    };
     amplitude.logEvent("changed settings", eventProperties);
     toast("Settings updated to " + event.target.dataset.label, 2000);
   });

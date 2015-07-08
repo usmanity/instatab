@@ -21,6 +21,7 @@ var getInstagramFeed = function(){
 var displayFeed = function(feed){
   var totalPhotos = 0;
   getSettings('layoutSettings').then(function(settings){
+    console.log(settings)
     if (settings == 'grid'){
       totalPhotos = 8;
       return 'low_resolution';
@@ -30,7 +31,14 @@ var displayFeed = function(feed){
     } else {
       return 'standard_resolution';
     }
+  }, function(error){
+    totalPhotos = 8;
+    if (amplitude) {
+      amplitude.logEvent(error);
+    }
+    return 'standard_resolution';
   }).then(function(resolution){
+    console.log(resolution)
     for (var i = 0; i < totalPhotos; i++){
         var post = feed.data[i];
         var timeSince = processTime(post.created_time);
@@ -52,6 +60,8 @@ var displayFeed = function(feed){
         var $heart = $("<span class='heart' data-id='' style='display:none;'></span>");
         if (post.caption){
           var $caption = $("<span class='caption'>"+ post.caption.text +"</span>")
+        } else {
+          var $caption = $("<span class='caption hidden'></span>")
         }
         var $liked = $("<span class='liked hidden'></span>")
         $username.prepend($avatar).append($time);
@@ -74,6 +84,7 @@ var displayFeed = function(feed){
   })
 
   getSettings('options').then(function(settings){
+    console.log(settings)
     var loopSetting = settings.loop === 'true';
     $("video").attr('loop', loopSetting);
   });
@@ -94,15 +105,16 @@ function pause(){
 }
 
 function getSettings(option){
-  return new Promise(function (fulfill, reject){
-    chrome.storage.local.get(option, function(cb){
-      var options = cb[option];
-      if (!options) {
-        reject();
-      }
-      fulfill(options);
-    });
-  })
+  var deferred = D();
+  chrome.storage.local.get(option, function(cb){
+    var options = cb[option];
+    if (!options) {
+      var error = option + ' not found';
+      deferred.reject(error);
+    }
+    deferred.resolve(options);
+  });
+  return deferred.promise;
 }
 
 function handleSingleClick(event){
@@ -151,14 +163,14 @@ function likeThis(post){
                 $(post).siblings('.heart').fadeOut(300).siblings('.liked').removeClass('hidden');
                 window.clearTimeout(likeTimer);
                 LIKING = false;
-            }, 700);
+            }, 600);
         },
         error: function(error){
             var likeTimer = window.setTimeout(function(){
                 $(post).siblings('.heart').fadeOut(300);
                 window.clearTimeout(likeTimer);
                 LIKING = false;
-            }, 700);
+            }, 600);
         },
         dataType: 'json'
     });
@@ -166,11 +178,20 @@ function likeThis(post){
 
 if (getPage() === 'tab') {
     $("#authLink").attr("href", AUTH_URL);
+
     getSettings('layoutSettings').then(function(layout){
+        console.log(layout)
         $(".feed").addClass(layout);
+    }, function(error){
+        if (amplitude) {
+          amplitude.logEvent(error);
+        }
+        $(".feed").addClass('grid');
     });
-    getAuth().then(function () {
-        if (authCode !== undefined && authCode !== "") {
+
+    getAuth().then(function(auth){
+      console.log(auth)
+        if (auth !== undefined && auth !== "") {
             getInstagramFeed();
             $('.auth-button').addClass('hidden');
             setUser();

@@ -7,7 +7,7 @@ var AUTH_URL = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID +
 var app = chrome.runtime.getManifest();
 var authButtonCounter = 0;
 var authCode;
-var delay = 500;
+var delay = 400;
 var clicks = 0;
 var clickTimer = null;
 var loro;
@@ -21,12 +21,12 @@ function setAuth(code){
 }
 
 function getAuth(){
-  return new Promise(function(fulfill, reject){
-    chrome.storage.local.get('auth', function(code){
-      authCode = code.auth;
-      fulfill();
-    });
+  var deferred = D();
+  chrome.storage.local.get('auth', function(code){
+    authCode = code.auth;
+    deferred.resolve(authCode);
   });
+  return deferred.promise;
 }
 
 function getPage(){
