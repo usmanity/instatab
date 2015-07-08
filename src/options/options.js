@@ -85,10 +85,4 @@ if (getPage() === "options"){
     amplitude.logEvent("changed settings", eventProperties);
     toast("Settings updated to " + event.target.dataset.label, 2000);
   });
-
-  checkForTribute().then(function(allow){
-      if (allow){
-          showStats();
-      }
-  });
 }

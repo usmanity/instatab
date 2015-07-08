@@ -84,23 +84,12 @@ function updateStats(){
 
 function getTotalTabsOpened(){
   var deferred = D();
+  console.log("Starting getTotalTabsOpened promise");
   chrome.storage.local.get('total', function(level){
     if (level.total) {
       deferred.resolve(level.total);
     } else {
       deferred.reject({});
-    }
-  });
-  return deferred.promise;
-}
-
-function checkForTribute(){
-  var deferred = D();
-  chrome.storage.local.get('rekt', function(air){
-    if (air.rekt) {
-      deferred.resolve(air.rekt);
-    } else {
-      deferred.reject();
     }
   });
   return deferred.promise;
