@@ -19,7 +19,7 @@ var getInstagramFeed = function(){
 };
 
 var displayFeed = function(feed){
-  var totalPhotos = 0;
+  var totalPhotos = 8;
   getSettings('layoutSettings').then(function(settings){
     console.log(settings)
     if (settings == 'grid'){
@@ -38,7 +38,10 @@ var displayFeed = function(feed){
     }
     return 'standard_resolution';
   }).then(function(resolution){
-    console.log(resolution)
+    console.log(resolution);
+    console.log(totalPhotos);
+    amplitude.logEvent("resolution", { res: resolution});
+    amplitude.logEvent("totalPhotos", {count: totalPhotos});
     for (var i = 0; i < totalPhotos; i++){
         var post = feed.data[i];
         var timeSince = processTime(post.created_time);
