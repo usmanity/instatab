@@ -84,7 +84,6 @@ function updateStats(){
 
 function getTotalTabsOpened(){
   var deferred = D();
-  console.log("Starting getTotalTabsOpened promise");
   chrome.storage.local.get('total', function(level){
     if (level.total) {
       deferred.resolve(level.total);

@@ -33,14 +33,6 @@ if (getPage() === "options"){
     $("#loggedOut").removeClass("hidden");
     $("#loggedIn").addClass("hidden");
   });
-  $(window).konami();
-  $(window).on('konami', function() {
-    console.log("Tributes disabled!");
-    chrome.storage.local.set({rekt: 'dabes'});
-    amplitude.logEvent('konami enabled');
-    toast('<strong>Konami enabled!</strong><br> You will now see beta features throughout InstaTab!', 2000);
-    showStats();
-  });
 
   chrome.storage.local.get('options', function(cb){
     var options = cb.options;

@@ -21,7 +21,6 @@ var getInstagramFeed = function(){
 var displayFeed = function(feed){
   var totalPhotos = 8;
   getSettings('layoutSettings').then(function(settings){
-    console.log(settings)
     if (settings == 'grid'){
       totalPhotos = 8;
       return 'low_resolution';
@@ -38,8 +37,6 @@ var displayFeed = function(feed){
     }
     return 'standard_resolution';
   }).then(function(resolution){
-    console.log(resolution);
-    console.log(totalPhotos);
     amplitude.logEvent("resolution", { res: resolution});
     amplitude.logEvent("totalPhotos", {count: totalPhotos});
     for (var i = 0; i < totalPhotos; i++){
@@ -87,7 +84,6 @@ var displayFeed = function(feed){
   })
 
   getSettings('options').then(function(settings){
-    console.log(settings)
     var loopSetting = settings.loop === 'true';
     $("video").attr('loop', loopSetting);
   });
