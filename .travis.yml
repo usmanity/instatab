@@ -1,3 +1,3 @@
-language: node
+language: node_js
 rvm:
  - "0.12"
