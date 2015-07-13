@@ -162,14 +162,14 @@ function likeThis(post){
                 $(post).siblings('.heart').fadeOut(300).siblings('.liked').removeClass('hidden');
                 window.clearTimeout(likeTimer);
                 LIKING = false;
-            }, 600);
+            }, 500);
         },
         error: function(error){
             var likeTimer = window.setTimeout(function(){
                 $(post).siblings('.heart').fadeOut(300);
                 window.clearTimeout(likeTimer);
                 LIKING = false;
-            }, 600);
+            }, 500);
         },
         dataType: 'json'
     });
@@ -177,9 +177,7 @@ function likeThis(post){
 
 if (getPage() === 'tab') {
     $("#authLink").attr("href", AUTH_URL);
-
     getSettings('layoutSettings').then(function(layout){
-        console.log(layout)
         $(".feed").addClass(layout);
     }, function(error){
         if (amplitude) {
@@ -189,7 +187,6 @@ if (getPage() === 'tab') {
     });
 
     getAuth().then(function(auth){
-      console.log(auth)
         if (auth !== undefined && auth !== "") {
             getInstagramFeed();
             $('.auth-button').addClass('hidden');

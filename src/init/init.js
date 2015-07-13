@@ -68,7 +68,6 @@ function updateStats(){
       });
     }
   });
-
   chrome.storage.local.get('total', function(level){
     if (level.total){
       chrome.storage.local.set({

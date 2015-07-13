@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "client_id": "fdd685e3f1674541bf50829b962e9d1d",
+    "redirect_uri": "chrome-extension://ganbklghamibmlcbbdpmncnfnbkggkkd/src/auth/finished.html",
+    "redirect_id": "ganbklghamibmlcbbdpmncnfnbkggkkd",
+    "log": "_log",
+    "amplitude_key": "95324701c60ef4f2d79139071cd93b4e",
+    "timer_start": "console.time('tabbyTimer');",
+    "timer_end": "console.timeEnd('tabbyTimer');"
+  }
+}

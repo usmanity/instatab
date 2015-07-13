@@ -5,3 +5,4 @@ config.json
 prod/
 instatab.zip
 .idea/
+.DS_Store
