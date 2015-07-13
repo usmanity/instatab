@@ -6,3 +6,4 @@ prod/
 instatab.zip
 .idea/
 .DS_Store
+**/*/.DS_Store
