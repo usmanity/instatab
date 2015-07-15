@@ -1,13 +1,16 @@
-var init = require('./../init/init.js');
+var app = require('./../app.js');
 var config = require('./../config.js');
 var util = require('./../util.js');
+
+var $ = require('jquery');
+var D = require('d.js');
 
 var getInstagramFeed = function(){
   var instagramUrl = "https://api.instagram.com/v1/users/self/feed";
   $.ajax({
     url: instagramUrl,
     data: {
-      access_token: init.authCode,
+      access_token: app.authCode,
       count: config.count
     },
     success: function(response){
@@ -45,7 +48,7 @@ var displayFeed = function(feed){
     amplitude.logEvent("totalPhotos", {count: totalPhotos});
     for (var i = 0; i < totalPhotos; i++){
         var post = feed.data[i];
-        var timeSince = init.processTime(post.created_time);
+        var timeSince = app.processTime(post.created_time);
         var imageUrl = post.images[resolution].url;
         var username = post.user;
         var $el = $("<div class='container'></div>");
@@ -155,11 +158,11 @@ function handleDoubleClick(event){
 function likeThis(post){
     LIKING = true;
     $(post).siblings('.heart').removeClass('hidden').fadeIn(300);
-    var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes?access_token=" + init.authCode;
+    var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes?access_token=" + app.authCode;
     $.post(instagramUrl, {
         url: instagramUrl,
         data: {
-            access_token: init.authCode
+            access_token: app.authCode
         },
         success: function(data){
             var likeTimer = window.setTimeout(function(){
@@ -179,7 +182,7 @@ function likeThis(post){
     });
 }
 
-if (init.getPage() === 'tab') {
+if (app.getPage() === 'tab') {
     $("#authLink").attr("href", config.AUTH_URL);
     getSettings('layoutSettings').then(function(layout){
         $(".feed").addClass(layout);
@@ -190,7 +193,7 @@ if (init.getPage() === 'tab') {
         $(".feed").addClass('grid');
     });
 
-    init.getAuth().then(function(auth){
+    app.getAuth().then(function(auth){
         if (auth !== undefined && auth !== "") {
             getInstagramFeed();
             $('.auth-button').addClass('hidden');

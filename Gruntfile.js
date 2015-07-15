@@ -31,11 +31,11 @@ module.exports = function(grunt) {
     },
     browserify: {
       dev: {
-        src: 'dist/src/dev.js',
+        src: 'src/index.js',
         dest: 'dist/build.js'
       },
       prod: {
-        src: 'dist/src/prod.js',
+        src: 'src/index.js',
         dest: 'prod/dist/build.js'
       }
     },

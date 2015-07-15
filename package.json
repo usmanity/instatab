@@ -15,5 +15,10 @@
   },
   "scripts": {
     "test": "mocha"
+  },
+  "dependencies": {
+    "d.js": "^0.7.3",
+    "jquery": "^2.1.4",
+    "moment": "^2.10.3"
   }
 }

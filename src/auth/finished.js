@@ -1,6 +1,6 @@
-var init = require('./../init/init.js');
+var app = require('./../app.js');
 
-if (init.getPage() === "finished"){
+if (app.getPage() === "finished"){
   access_token = location.hash.split("=")[1];
-  init.setAuth(access_token);
+  app.setAuth(access_token);
 }
