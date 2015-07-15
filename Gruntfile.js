@@ -54,7 +54,8 @@ module.exports = function(grunt) {
       prod: {
         files: {
           'prod/dist/build.js': 'prod/dist/build.js'
-        }
+        },
+        mangle: false
       }
     },
     copy: {
@@ -110,6 +111,6 @@ module.exports = function(grunt) {
 
   // Default task(s).
 
-  grunt.registerTask('prod', ['includereplace:prod', 'browserify:prod', 'copy:prod', 'clean:prod', 'compress:main']);
+  grunt.registerTask('prod', ['includereplace:prod', 'browserify:prod', 'copy:prod', 'uglify:prod', 'clean:prod', 'compress:main']);
   grunt.registerTask('dev', ['includereplace:dev', 'browserify:dev', 'copy:dev']);
 };
