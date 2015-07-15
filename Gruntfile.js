@@ -32,7 +32,12 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         src: 'src/index.js',
-        dest: 'dist/build.js'
+        dest: 'dist/build.js',
+        options: {
+          browserifyOptions: {
+            debug: true
+          }
+        }
       },
       prod: {
         src: 'src/index.js',
