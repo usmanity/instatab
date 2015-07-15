@@ -27,7 +27,7 @@ var setUser = function(){
 };
 
 var eventProperties = {
-  appVersion: app.app.version
+  appVersion: app.manifest.version
 };
 
 amplitude.logEvent("opened new tab", eventProperties);

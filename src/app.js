@@ -15,7 +15,7 @@ var LIKING;
 
 var app = {};
 
-app.app = chrome.runtime.getManifest();
+app.manifest = chrome.runtime.getManifest();
 app.authCode = undefined;
 
 // save and retrieve from chrome local storage
@@ -104,6 +104,6 @@ app.toast = function (message, delay){
   }, delay);
 }
 
-console.info("Thanks for using InstaTab, you're running on version " + app.app.version);
+console.info("Thanks for using InstaTab, you're running on version " + app.manifest.version);
 
 module.exports = app;
