@@ -104,10 +104,6 @@ app.toast = function (message, delay){
   }, delay);
 }
 
-app.numberWithCommas = function (x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
 console.info("Thanks for using InstaTab, you're running on version " + app.app.version);
 
 module.exports = app;

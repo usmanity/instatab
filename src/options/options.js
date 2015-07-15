@@ -1,12 +1,13 @@
 var app = require('./../app.js');
 var config = require('./../config.js');
+var util = require('./../util.js');
 
 var $ = require('jquery');
 
 function showStats(){
   $(".stats").removeClass('hidden');
   app.getTotalTabsOpened().then(function(tabs){
-    $('#totalNumber').text(app.numberWithCommas(tabs));
+    $('#totalNumber').text(util.numberWithCommas(tabs));
   });
 }
 
