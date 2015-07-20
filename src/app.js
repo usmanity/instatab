@@ -6,14 +6,10 @@ var D = require('d.js');
 
 util.timer.start();
 
-var authButtonCounter = 0;
-var delay = 400;
-var clicks = 0;
-var clickTimer = null;
 var loro;
-var LIKING;
 
 var app = {};
+window.app = app;
 
 app.manifest = chrome.runtime.getManifest();
 app.authCode = undefined;

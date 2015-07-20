@@ -5,6 +5,11 @@ var util = require('./../util.js');
 var $ = require('jquery');
 var D = require('d.js');
 
+var clicks;
+var clickTimer = null;
+var delay = 400;
+var LIKING;
+
 var getInstagramFeed = function(){
   var instagramUrl = "https://api.instagram.com/v1/users/self/feed";
   $.ajax({
@@ -158,7 +163,13 @@ function handleDoubleClick(event){
 function likeThis(post){
     LIKING = true;
     $(post).siblings('.heart').removeClass('hidden').fadeIn(300);
-    var instagramUrl = "https://api.instagram.com/v1/media/" + post.parentElement.dataset.id +"/likes?access_token=" + app.authCode;
+    var instagramUrl = [
+      "https://api.instagram.com/v1/media/",
+      post.parentElement.dataset.id,
+      "/likes?access_token=",
+      app.authCode
+    ].join('');
+
     $.post(instagramUrl, {
         url: instagramUrl,
         data: {
