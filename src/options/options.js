@@ -1,19 +1,26 @@
+var app = require('./../app.js');
+var config = require('./../config.js');
+var util = require('./../util.js');
+
+var $ = require('jquery');
+
 function showStats(){
   $(".stats").removeClass('hidden');
-  getTotalTabsOpened().then(function(tabs){
-    $('#totalNumber').text(numberWithCommas(tabs));
+  app.getTotalTabsOpened().then(function(tabs){
+    $('#totalNumber').text(util.numberWithCommas(tabs));
   });
 }
-if (getPage() === "options"){
-  $("#authLink").attr('href', AUTH_URL);
+
+if (app.getPage() === "options"){
+  $("#authLink").attr('href', config.AUTH_URL);
   var intervalCounter = 0;
   var settings = {};
   var $loopSettings = $("input[name='loop']");
   var $gridSettings = $("input[name='grid']");
-  getAuth();
+  app.getAuth();
 
   pageInterval = window.setInterval(function(){
-    if (authCode === ""){
+    if (app.authCode === ""){
       $("#loggedIn").addClass("hidden");
       $("#loggedOut").removeClass("hidden");
     } else {
@@ -28,7 +35,7 @@ if (getPage() === "options"){
   }, 500);
 
   $("#disconnect").click(function(){
-    setAuth('');
+    app.setAuth('');
     $("#disconnected").removeClass("hidden");
     $("#loggedOut").removeClass("hidden");
     $("#loggedIn").addClass("hidden");
@@ -65,7 +72,7 @@ if (getPage() === "options"){
     // logging
     var eventProperties = {loopType: event.target.dataset.label};
     amplitude.logEvent("changed settings", eventProperties);
-    toast("Settings updated to " + event.target.dataset.label, 2000);
+    app.toast("Settings updated to " + event.target.dataset.label, 2000);
   });
 
   $gridSettings.on('change', function(event){
@@ -77,6 +84,6 @@ if (getPage() === "options"){
       gridSetting: event.target.dataset.label
     };
     amplitude.logEvent("changed settings", eventProperties);
-    toast("Settings updated to " + event.target.dataset.label, 2000);
+    app.toast("Settings updated to " + event.target.dataset.label, 2000);
   });
 }

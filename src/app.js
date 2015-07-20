@@ -1,39 +1,43 @@
-{{timer_start}}
-// constants from config
-var CLIENT_ID = "{{client_id}}";
-var REDIRECT_URI = "chrome-extension://"+ window.location.origin.split("//")[1] +"/src/auth/finished.html";
-var AUTH_URL = "https://instagram.com/oauth/authorize/?client_id=" + CLIENT_ID + "&redirect_uri=" + REDIRECT_URI + "&response_type=token&scope=likes+relationships+comments";
+var util = require('./util.js');
+var config = require('./config.js');
+var $ = require('jquery');
+var moment = require('moment');
+var D = require('d.js');
 
-var app = chrome.runtime.getManifest();
+util.timer.start();
+
 var authButtonCounter = 0;
-var authCode;
 var delay = 400;
 var clicks = 0;
 var clickTimer = null;
 var loro;
-var COUNT = 15;
 var LIKING;
 
+var app = {};
+
+app.manifest = chrome.runtime.getManifest();
+app.authCode = undefined;
+
 // save and retrieve from chrome local storage
-function setAuth(code){
+app.setAuth = function (code){
   chrome.storage.local.set({'auth': code});
-  authCode = code;
+  this.authCode = code;
 }
 
-function getAuth(){
+app.getAuth = function (){
   var deferred = D();
   chrome.storage.local.get('auth', function(code){
-    authCode = code.auth;
-    deferred.resolve(authCode);
-  });
+    this.authCode = code.auth;
+    deferred.resolve(this.authCode);
+  }.bind(this));
   return deferred.promise;
 }
 
-function getPage(){
+app.getPage = function (){
   return $('body').data('page');
 }
 
-function processTime(ms){
+app.processTime = function (ms){
   var seconds = ms * 1000;
   var timeSince = moment(seconds).fromNow(true);
   var now = moment();
@@ -48,7 +52,7 @@ function processTime(ms){
   }
 }
 
-function updateStats(){
+app.updateStats = function (){
   chrome.storage.local.get('hinis', function(level){
     if (level.hinis){
       if (level.hinis > 10){
@@ -81,7 +85,7 @@ function updateStats(){
   });
 }
 
-function getTotalTabsOpened(){
+app.getTotalTabsOpened = function (){
   var deferred = D();
   chrome.storage.local.get('total', function(level){
     if (level.total) {
@@ -93,14 +97,13 @@ function getTotalTabsOpened(){
   return deferred.promise;
 }
 
-function toast(message, delay){
+app.toast = function (message, delay){
   $('.alert-container').removeClass('hidden').html(message);
   window.setTimeout(function(){
     $('.alert-container').addClass('hidden');
   }, delay);
 }
 
-function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-console.info("Thanks for using InstaTab, you're running on version " + app.version);
+console.info("Thanks for using InstaTab, you're running on version " + app.manifest.version);
+
+module.exports = app;

@@ -29,27 +29,18 @@ module.exports = function(grunt) {
         ]
       }
     },
-    concat: {
+    browserify: {
       dev: {
-        src: [
-              'dist/src/init/init.js',
-              'dist/src/auth/finished.js',
-              'dist/src/auth/start.js',
-              'dist/src/override/tab.js',
-              'dist/src/options/options.js',
-              'dist/src/init/analytics.js'
-             ],
-        dest: 'dist/build.js'
+        src: 'src/index.js',
+        dest: 'dist/build.js',
+        options: {
+          browserifyOptions: {
+            debug: true
+          }
+        }
       },
       prod: {
-        src: [
-              'prod/dist/src/init/init.js',
-              'prod/dist/src/auth/finished.js',
-              'prod/dist/src/auth/start.js',
-              'prod/dist/src/override/tab.js',
-              'prod/dist/src/options/options.js',
-              'prod/dist/src/init/analytics.js'
-             ],
+        src: 'src/index.js',
         dest: 'prod/dist/build.js'
       }
     },
@@ -63,7 +54,8 @@ module.exports = function(grunt) {
       prod: {
         files: {
           'prod/dist/build.js': 'prod/dist/build.js'
-        }
+        },
+        mangle: false
       }
     },
     copy: {
@@ -112,13 +104,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-include-replace');
-  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compress');
+  grunt.loadNpmTasks('grunt-browserify');
 
   // Default task(s).
 
-  grunt.registerTask('prod', ['includereplace:prod', 'concat:prod', 'copy:prod', 'clean:prod', 'compress:main']);
-  grunt.registerTask('dev', ['includereplace:dev', 'concat:dev', 'copy:dev']);
+  grunt.registerTask('prod', ['includereplace:prod', 'browserify:prod', 'copy:prod', 'uglify:prod', 'clean:prod', 'compress:main']);
+  grunt.registerTask('dev', ['includereplace:dev', 'browserify:dev', 'copy:dev']);
 };
